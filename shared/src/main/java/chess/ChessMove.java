@@ -20,15 +20,15 @@ public class ChessMove {
     }
 
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition){
-        this(startPosition,endPosition, null);
+        this(startPosition, endPosition, null);
     }
 
     /**
      * @return ChessPosition of starting location
      */
     public ChessPosition getStartPosition() {
-        //return this.start;
-        throw new RuntimeException("Not implemented");
+        return this.start;
+        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -61,8 +61,8 @@ public class ChessMove {
             return false;
         }
         ChessMove other = (ChessMove)obj;
-        return (other.getEndPosition()==this.getEndPosition() && other.getStartPosition() == this.getStartPosition()
-        && other.getPromotionPiece().equals(this.getPromotionPiece()));
+        return (other.end.equals(this.end) && other.start.equals(this.start)
+        && other.getPromotionPiece() == this.getPromotionPiece());
     }
 
     @Override
@@ -72,7 +72,7 @@ public class ChessMove {
 
     @Override
     public String toString(){
-        return String.format("ChessMove(start position: %s, end position: %s, promotion piece type: %s", this.getStartPosition(),
+        return String.format("ChessMove(start position: %s, end position: %s, promotion piece type: %s)", this.getStartPosition(),
     this.getEndPosition(), this.getPromotionPiece());
     }
 

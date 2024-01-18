@@ -36,6 +36,14 @@ public class ChessPosition {
         //throw new RuntimeException("Not implemented");
     }
 
+    public boolean isOpen(){
+        return getRow() <= 8 && getColumn() <= 8 && getRow() > 0 && getColumn() > 0;
+    }
+
+    public ChessPosition changePosition(int r, int c){
+        return new ChessPosition(row + r, col + c);
+    }
+
     @Override
     public boolean equals(Object obj){
         if (obj == null){
@@ -48,7 +56,7 @@ public class ChessPosition {
             return false;
         }
         ChessPosition o = (ChessPosition)obj;
-        return getColumn() == o.getColumn() && getRow() == o.getRow();
+        return this.col == o.col && row == o.row;
     }
     @Override
     public int hashCode(){

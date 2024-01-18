@@ -2,7 +2,6 @@ package chess.pieces;
 
 import chess.ChessBoard;
 import chess.ChessMove;
-import chess.ChessPiece;
 import chess.ChessPosition;
 
 import java.util.ArrayList;
@@ -17,53 +16,55 @@ public class BishopMoveCalculator {
     }
 
     public ArrayList<ChessMove> getMoves(){
+        //bottom left direction
         ArrayList<ChessMove> possible = new ArrayList<>();
-        //check all moves in up-right direction.
-        for (int i=1; this.position.getRow() + i <= 8 && this.position.getColumn() + i <= 8; i++){
-                ChessPosition pos = new ChessPosition(this.position.getRow()+i, this.position.getColumn()+i);
-                if (board.getPiece(pos) == null){
-                    ChessMove to_add = new ChessMove(this.position, pos);
-                    possible.add(to_add);
-                } else {
-                    break;
-                }
-        }
-        //check all moves in the up-left direction
-        for (int i=1; this.position.getRow() + i <= 8 && this.position.getColumn() - i > 0; i++){
-            ChessPosition pos = new ChessPosition(this.position.getRow()+i, this.position.getColumn()-i);
-            if (board.getPiece(pos) == null){
-                ChessMove to_add = new ChessMove(this.position, pos);
-                possible.add(to_add);
-            } else {
-                break;
-            }
-        }
-        //check all moves in the lower-right direction
-        for (int i=1; this.position.getRow() - i > 8 && this.position.getColumn() + i <= 8; i++){
-            ChessPosition pos = new ChessPosition(this.position.getRow()-i, this.position.getColumn()+i);
-            if (board.getPiece(pos) == null){
-                ChessMove to_add = new ChessMove(this.position, pos);
-                possible.add(to_add);
-            } else {
-                break;
-            }
-        }
-        //check all moves in the lower-left direction
-        for (int i=1; this.position.getRow() - i > 0 && this.position.getColumn() - i > 0; i++){
+        for (int i=1; i < 8; i++){
             ChessPosition pos = new ChessPosition(this.position.getRow()-i, this.position.getColumn()-i);
-            if (board.getPiece(pos) == null){
-                ChessMove to_add = new ChessMove(this.position, pos);
-                possible.add(to_add);
-            } else {
-                break;
+            if (pos.isOpen()){
+                ChessMove move = new ChessMove(position, pos);
+                possible.add(move);
+            }
+            ChessPosition pos1 = new ChessPosition(this.position.getRow()+i, this.position.getColumn()+i);
+            if (pos1.isOpen()){
+                ChessMove move = new ChessMove(position, pos1);
+                possible.add(move);
+            }
+            ChessPosition pos2 = new ChessPosition(this.position.getRow()-i, this.position.getColumn()+i);
+            if (pos2.isOpen()){
+                ChessMove move = new ChessMove(position, pos2);
+                possible.add(move);
+            }
+            ChessPosition pos3 = new ChessPosition(this.position.getRow()+i, this.position.getColumn()-i);
+            if (pos3.isOpen()){
+                ChessMove move = new ChessMove(position, pos3);
+                possible.add(move);
             }
         }
         return possible;
     }
 
     @Override
+    public boolean equals(Object obj){
+        if (obj == null){
+            return false;
+        }
+        if (obj == this){
+            return true;
+        }
+        if (this.getClass() != obj.getClass()){
+            return false;
+        }
+        BishopMoveCalculator other = (BishopMoveCalculator)obj;
+        return board.equals(other.board) && position.equals(other.position);
+    }
+
+    @Override
+    public int hashCode(){
+        return board.hashCode() + position.hashCode();
+    }
+    @Override
     public String toString(){
-        return String.format("BishopMoveCalculator(position: %s)", this.position);
+        return String.format("BishopMoveCalculator(possible moves: %s)", this.getMoves());
     }
 
 }
