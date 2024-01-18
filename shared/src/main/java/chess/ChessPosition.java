@@ -54,5 +54,10 @@ public class ChessPosition {
     public int hashCode(){
         return (getRow() % 4) * 4 + (getColumn() % 4) + getColumn() * 3;
     }
+
+    @Override
+    public String toString(){
+        return String.format("ChessPosition(row: %d, column: %d)", getRow(), getColumn());
+    }
 }
 

@@ -60,5 +60,11 @@ public class BishopMoveCalculator {
         }
         return possible;
     }
+
+    @Override
+    public String toString(){
+        return String.format("BishopMoveCalculator(position: %s)", this.position);
+    }
+
 }
 

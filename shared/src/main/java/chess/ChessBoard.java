@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * signature of the existing methods.
  */
 public class ChessBoard {
-    private static ArrayList<ArrayList<ChessPiece>> setNormal_board(){
+    private static ArrayList<ArrayList<ChessPiece>> setNormalBoard(){
         //Create the whole board
         ArrayList<ArrayList<ChessPiece>> starting_board = new ArrayList<>();
 
@@ -31,25 +31,24 @@ public class ChessBoard {
         for (int i=0; i<8; i++){
             white_pawns.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN));
         }
-
         //Add second row to the board
         starting_board.add(white_pawns);
-
         //add the blank rows
-        for (int i=0; i<4; i++) {
-            starting_board.add(new ArrayList<>());
+        ArrayList<ChessPiece> empty_row = new ArrayList<>();
+        for (int i=0; i<8; i++) {
+            empty_row.add(null);
         }
-
+        for (int i=0; i<4; i++){
+            starting_board.add(empty_row);
+        }
         //Create the pawn row for black
         ArrayList<ChessPiece> black_pawns = new ArrayList<>();
         for (int i=0; i<8; i++){
             black_pawns.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN));
         }
-
         //Add pawn row for black
         starting_board.add(black_pawns);
-
-        //Create the first row (with pieces)
+        //Create the first black row (with pieces)
         ArrayList<ChessPiece> black_pieces = new ArrayList<>();
         black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
         black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
@@ -59,11 +58,11 @@ public class ChessBoard {
         black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
         black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
         black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
-
         //Add the first row to the board
         starting_board.add(black_pieces);
         return starting_board;
     }
+
     private static ArrayList<ArrayList<ChessPiece>> setEmpty_board(){
         ArrayList<ArrayList<ChessPiece>> starting_board = new ArrayList<>();
         ArrayList<ChessPiece> empty_row = new ArrayList<>();
@@ -75,9 +74,11 @@ public class ChessBoard {
         }
         return starting_board;
     }
+
+    //MEMBER VARIABLE
     public ArrayList<ArrayList<ChessPiece>> board;
     public ChessBoard() {
-       this.board = setEmpty_board();
+       this.board = setNormalBoard();
         //throw new RuntimeException("Not implemented");
     }
 
@@ -88,6 +89,9 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
+        if (position.getColumn()>8 || position.getRow()>8 || position.getColumn() < 1 || position.getRow() < 1){
+            throw new RuntimeException("Out of bounds");
+        }
         board.get(position.getRow() - 1).set(position.getColumn() - 1, piece);
         //throw new RuntimeException("Not implemented");
     }
@@ -109,7 +113,26 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-    //board = setNormal_board();
-        throw new RuntimeException("Not implemented");
+        board = setNormalBoard();
+        //throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null){
+            return false;
+        }
+
+        if (obj == this){
+            return true;
+        }
+
+        if (obj.getClass()!=getClass()){
+            return false;
+        }
+
+        ChessBoard test = (ChessBoard) obj;
+        //return test.getPiece(new ChessPosition(1, 1)) == getPiece(new ChessPosition(1,1));
+        return (test.board.equals(this.board));
     }
 }
