@@ -36,7 +36,7 @@ public class ChessPosition {
         //throw new RuntimeException("Not implemented");
     }
 
-    public boolean isOpen(){
+    public boolean isValid(){
         return getRow() <= 8 && getColumn() <= 8 && getRow() > 0 && getColumn() > 0;
     }
 

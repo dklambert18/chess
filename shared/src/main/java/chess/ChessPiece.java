@@ -1,8 +1,7 @@
 package chess;
 
-import chess.pieces.BishopMoveCalculator;
+import chess.pieces.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -14,12 +13,12 @@ import java.util.Collection;
 public class ChessPiece {
     private final PieceType type;
     private final ChessGame.TeamColor color;
+    public boolean hasMoved;
 
-    public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
-
+    public ChessPiece(ChessGame.TeamColor pieceColor, PieceType type) {
         this.type = type;
         this.color = pieceColor;
-
+        this.hasMoved = false;
         //throw new RuntimeException("Not implemented");
     }
 
@@ -60,8 +59,35 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        BishopMoveCalculator move_calc = new BishopMoveCalculator(board, myPosition);
-        return move_calc.getMoves();
+        KingMoveCalculator moveCalculator;
+        BishopMoveCalculator bishopMoveCalculator;
+        PawnMoveCalculator pawnMoveCalculator;
+        RookMoveCalculator rookMoveCalculator;
+        QueenMoveCalculator queenMoveCalculator;
+        KnightMoveCalculator knightMoveCalculator;
+        if (this.type.equals(PieceType.KING)) {
+                moveCalculator = new KingMoveCalculator(board, myPosition, this);
+                return moveCalculator.getMoves();
+            }
+        if (this.type.equals(PieceType.BISHOP)) {
+                bishopMoveCalculator = new BishopMoveCalculator(board, myPosition);
+                return bishopMoveCalculator.getMoves();
+            }
+        if (this.type.equals(PieceType.PAWN)) {
+                pawnMoveCalculator = new PawnMoveCalculator(board, myPosition, this);
+                return pawnMoveCalculator.getMoves();
+            }
+        if (this.type.equals(PieceType.ROOK)){
+                rookMoveCalculator = new RookMoveCalculator(board, myPosition, this);
+                return rookMoveCalculator.getMoves();
+            }
+        if (this.type.equals(PieceType.QUEEN)){
+                queenMoveCalculator = new QueenMoveCalculator(board, myPosition);
+                return queenMoveCalculator.getMoves();
+            } else {
+            knightMoveCalculator = new KnightMoveCalculator(board, myPosition);
+            return knightMoveCalculator.getMoves();
+        }
     }
 
     @Override

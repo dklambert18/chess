@@ -16,7 +16,7 @@ public class ChessMove {
 
         this.start = startPosition;
         this.end = endPosition;
-        this.type = ChessPiece.PieceType.BISHOP;
+        this.type = promotionPiece;
     }
 
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition){
@@ -67,7 +67,8 @@ public class ChessMove {
 
     @Override
     public int hashCode(){
-        return start.hashCode() + end.hashCode() + getPromotionPiece().hashCode() - 20;
+        return this.getPromotionPiece()!=null ? start.hashCode() + end.hashCode() + 20 + getPromotionPiece().hashCode():
+                start.hashCode() + end.hashCode() + 20 ;
     }
 
     @Override

@@ -2,6 +2,7 @@ package chess.pieces;
 
 import chess.ChessBoard;
 import chess.ChessMove;
+import chess.ChessPiece;
 import chess.ChessPosition;
 
 import java.util.ArrayList;
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 public class KingMoveCalculator {
     private final ChessBoard board;
     private final ChessPosition position;
+    private ChessPiece piece;
 
-    public KingMoveCalculator(ChessBoard board, ChessPosition position){
+    public KingMoveCalculator(ChessBoard board, ChessPosition position, ChessPiece piece){
         this.board = board;
         this.position = position;
+        this.piece = piece;
     }
 
     public ArrayList<ChessMove> getMoves(){
@@ -34,13 +37,7 @@ public class KingMoveCalculator {
         possible.add(topLeft);
         possible.add(Top);
 
-        for (ChessMove thing : possible){
-            if (thing.getEndPosition().isOpen()) {
-                if (board.getPiece(thing.getEndPosition()) != null) {
-                    possible.remove(thing);
-                }
-            }
-        }
+        possible.removeIf(thing -> !thing.getEndPosition().isValid());
         return possible;
     }
 
@@ -66,7 +63,6 @@ public class KingMoveCalculator {
 
     @Override
     public String toString(){
-        return String.format("KingMoveCalculator(possible moves: %s)", this.getMoves());
+        return String.format("KingMoveCalculator(possible moves: %s)", this.position);
     }
-
 }

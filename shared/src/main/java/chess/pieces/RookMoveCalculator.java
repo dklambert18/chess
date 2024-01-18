@@ -2,23 +2,25 @@ package chess.pieces;
 
 import chess.ChessBoard;
 import chess.ChessMove;
+import chess.ChessPiece;
 import chess.ChessPosition;
 
 import java.util.ArrayList;
 
-public class BishopMoveCalculator {
-    private final ChessBoard board;
-    private final ChessPosition position;
+public class RookMoveCalculator {
+    private ChessBoard board;
+    private ChessPosition position;
+    private ChessPiece piece;
 
-    public BishopMoveCalculator(ChessBoard board, ChessPosition position){
+    public RookMoveCalculator(ChessBoard board, ChessPosition position, ChessPiece piece){
         this.board = board;
         this.position = position;
+        this.piece = piece;
     }
 
     public ArrayList<ChessMove> getMoves(){
-        //bottom left direction
         ArrayList<ChessMove> possible = new ArrayList<>();
-        int[][] it = {{1,1},{-1,-1},{-1,1},{1,-1}};
+        int[][] it = {{1,0},{-1,0},{0,1},{0,-1}};
         for (int[] mul : it){
             for (int i=1; i < 8; i++){
                 ChessPosition pos = new ChessPosition(this.position.getRow() + i * mul[0],
@@ -46,7 +48,7 @@ public class BishopMoveCalculator {
         if (this.getClass() != obj.getClass()){
             return false;
         }
-        BishopMoveCalculator other = (BishopMoveCalculator)obj;
+        RookMoveCalculator other = (RookMoveCalculator)obj;
         return board.equals(other.board) && position.equals(other.position);
     }
 
@@ -54,10 +56,9 @@ public class BishopMoveCalculator {
     public int hashCode(){
         return board.hashCode() + position.hashCode();
     }
+
     @Override
     public String toString(){
-        return String.format("BishopMoveCalculator(possible moves: %s)", this.getMoves());
+        return String.format("KingMoveCalculator(possible moves: %s)", this.position);
     }
-
 }
-

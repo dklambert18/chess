@@ -92,8 +92,8 @@ public class ChessBoard {
         if (position.getColumn()>8 || position.getRow()>8 || position.getColumn() < 1 || position.getRow() < 1){
             throw new RuntimeException("Out of bounds");
         }
-        if (board.get(position.getRow() - 1).get(position.getColumn() - 1) != null){
-            throw new RuntimeException("There's already a piece in that spot bitch");
+        if (board.get(position.getRow() - 1).get(position.getColumn() - 1) != null) {
+            board.get(position.getRow() - 1).remove(position.getColumn() - 1);
         }
         board.get(position.getRow() - 1).set(position.getColumn() - 1, piece);
         //throw new RuntimeException("Not implemented");
@@ -108,7 +108,10 @@ public class ChessBoard {
      */
     public ChessPiece getPiece(ChessPosition position) {
         return board.get(position.getRow() - 1).get(position.getColumn() - 1);
-        //throw new RuntimeException("Not implemented");
+    }
+
+    public boolean hasPiece(ChessPosition position){
+        return board.get(position.getRow() - 1).get(position.getColumn() - 1) != null;
     }
 
     /**
