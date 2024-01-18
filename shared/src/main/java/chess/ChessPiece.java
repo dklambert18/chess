@@ -1,5 +1,8 @@
 package chess;
 
+import chess.pieces.BishopMoveCalculator;
+
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -9,8 +12,15 @@ import java.util.Collection;
  * signature of the existing methods.
  */
 public class ChessPiece {
+    private final PieceType type;
+    private final ChessGame.TeamColor color;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+
+        this.type = type;
+        this.color = pieceColor;
+
+        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -29,6 +39,8 @@ public class ChessPiece {
      * @return Which team this chess piece belongs to
      */
     public ChessGame.TeamColor getTeamColor() {
+
+        //return this.color;
         throw new RuntimeException("Not implemented");
     }
 
@@ -36,8 +48,9 @@ public class ChessPiece {
      * @return which type of chess piece this piece is
      */
     public PieceType getPieceType() {
+        //return this.type;
         throw new RuntimeException("Not implemented");
-    }
+        }
 
     /**
      * Calculates all the positions a chess piece can move to
@@ -47,6 +60,15 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        BishopMoveCalculator move_calc = new BishopMoveCalculator(board, myPosition);
+        return move_calc.getMoves();
     }
+
+
+    @Override
+    public int hashCode(){
+        return 0;
+    }
+
+
 }

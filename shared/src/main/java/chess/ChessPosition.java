@@ -7,8 +7,15 @@ package chess;
  * signature of the existing methods.
  */
 public class ChessPosition {
+    private final int row;
+    private final int col;
 
     public ChessPosition(int row, int col) {
+
+        this.row = row;
+        this.col = col;
+
+        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -16,7 +23,8 @@ public class ChessPosition {
      * 1 codes for the bottom row
      */
     public int getRow() {
-        throw new RuntimeException("Not implemented");
+        return this.row;
+        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -24,6 +32,23 @@ public class ChessPosition {
      * 1 codes for the left row
      */
     public int getColumn() {
-        throw new RuntimeException("Not implemented");
+        return this.col;
+        //throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null){
+            return false;
+        }
+        if (obj == this){
+            return true;
+        }
+        if (obj.getClass() != getClass()){
+            return false;
+        }
+        ChessPosition o = (ChessPosition)obj;
+        return getColumn() == o.getColumn() && getRow() == o.getRow();
     }
 }
+

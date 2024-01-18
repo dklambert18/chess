@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
@@ -7,9 +9,76 @@ package chess;
  * signature of the existing methods.
  */
 public class ChessBoard {
+    private static ArrayList<ArrayList<ChessPiece>> setNormal_board(){
+        //Create the whole board
+        ArrayList<ArrayList<ChessPiece>> starting_board = new ArrayList<>();
 
+        //Create the first row (with pieces)
+        ArrayList<ChessPiece> white_pieces = new ArrayList<>();
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN));
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING));
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+        white_pieces.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+        //Add the first row to the board
+        starting_board.add(white_pieces);
+
+        //Create the second row (with pieces)
+        ArrayList<ChessPiece> white_pawns = new ArrayList<>();
+        for (int i=0; i<8; i++){
+            white_pawns.add(new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN));
+        }
+
+        //Add second row to the board
+        starting_board.add(white_pawns);
+
+        //add the blank rows
+        for (int i=0; i<4; i++) {
+            starting_board.add(new ArrayList<>());
+        }
+
+        //Create the pawn row for black
+        ArrayList<ChessPiece> black_pawns = new ArrayList<>();
+        for (int i=0; i<8; i++){
+            black_pawns.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN));
+        }
+
+        //Add pawn row for black
+        starting_board.add(black_pawns);
+
+        //Create the first row (with pieces)
+        ArrayList<ChessPiece> black_pieces = new ArrayList<>();
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN));
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING));
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        black_pieces.add(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+
+        //Add the first row to the board
+        starting_board.add(black_pieces);
+        return starting_board;
+    }
+    private static ArrayList<ArrayList<ChessPiece>> setEmpty_board(){
+        ArrayList<ArrayList<ChessPiece>> starting_board = new ArrayList<>();
+        ArrayList<ChessPiece> empty_row = new ArrayList<>();
+        for (int i=0; i<8; i++){
+            empty_row.add(null);
+        }
+        for (int i=0; i<8; i++){
+            starting_board.add(empty_row);
+        }
+        return starting_board;
+    }
+    public ArrayList<ArrayList<ChessPiece>> board;
     public ChessBoard() {
-        
+       this.board = setEmpty_board();
+        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -19,7 +88,8 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        throw new RuntimeException("Not implemented");
+        board.get(position.getRow() - 1).set(position.getColumn() - 1, piece);
+        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -30,7 +100,8 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        throw new RuntimeException("Not implemented");
+        return board.get(position.getRow() - 1).get(position.getColumn() - 1);
+        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -38,6 +109,7 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
+    //board = setNormal_board();
         throw new RuntimeException("Not implemented");
     }
 }
