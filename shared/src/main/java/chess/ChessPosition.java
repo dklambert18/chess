@@ -50,5 +50,9 @@ public class ChessPosition {
         ChessPosition o = (ChessPosition)obj;
         return getColumn() == o.getColumn() && getRow() == o.getRow();
     }
+    @Override
+    public int hashCode(){
+        return (getRow() % 4) * 4 + (getColumn() % 4) + getColumn() * 3;
+    }
 }
 
