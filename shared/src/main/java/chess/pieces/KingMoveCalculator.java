@@ -20,24 +20,23 @@ public class KingMoveCalculator {
 
     public ArrayList<ChessMove> getMoves(){
         ArrayList<ChessMove> possible = new ArrayList<>();
-        ChessMove topRight = new ChessMove(position, position.changePosition(1,1));
-        ChessMove Right = new ChessMove(position, position.changePosition(0, 1));
-        ChessMove bottomRight = new ChessMove(position, position.changePosition(-1, 1));
-        ChessMove bottom = new ChessMove(position, position.changePosition(-1, 0));
-        ChessMove bottomLeft = new ChessMove(position, position.changePosition(-1, -1));
-        ChessMove Left = new ChessMove(position, position.changePosition(0, -1));
-        ChessMove topLeft = new ChessMove(position, position.changePosition(1, -1));
-        ChessMove Top = new ChessMove(position, position.changePosition(1, 0));
-        possible.add(topRight);
-        possible.add(Right);
-        possible.add(bottomRight);
-        possible.add(bottom);
-        possible.add(bottomLeft);
-        possible.add(Left);
-        possible.add(topLeft);
-        possible.add(Top);
-
-        possible.removeIf(thing -> !thing.getEndPosition().isValid());
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                ChessMove move = new ChessMove(position, position.changePosition(i, j));
+                if (position.changePosition(i, j).isValid()) {
+                    if (board.getPiece(position.changePosition(i, j)) == null) {
+                        possible.add(move);
+                    } else {
+                        if (!board.getPiece(position.changePosition(i, j)).getTeamColor().equals(piece.getTeamColor())) {
+                            possible.add(move);
+                        }
+                    }
+                }
+            }
+        }
         return possible;
     }
 

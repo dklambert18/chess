@@ -37,11 +37,15 @@ public class ChessPosition {
     }
 
     public boolean isValid(){
-        return getRow() <= 8 && getColumn() <= 8 && getRow() > 0 && getColumn() > 0;
+        return row <= 8 && col <= 8 && row > 0 && col > 0;
     }
 
     public ChessPosition changePosition(int r, int c){
         return new ChessPosition(row + r, col + c);
+    }
+
+    public boolean endPositionValid(int r, int c){
+        return r + row <= 8 && r + row > 0 && col + c > 0 && col + c <= 8;
     }
 
     @Override

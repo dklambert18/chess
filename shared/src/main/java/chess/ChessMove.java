@@ -28,14 +28,12 @@ public class ChessMove {
      */
     public ChessPosition getStartPosition() {
         return this.start;
-        //throw new RuntimeException("Not implemented");
     }
 
     /**
      * @return ChessPosition of ending location
      */
     public ChessPosition getEndPosition() {
-        //throw new RuntimeException("Not implemented");
         return this.end;
     }
 
@@ -73,7 +71,7 @@ public class ChessMove {
 
     @Override
     public String toString(){
-        return String.format("ChessMove(start position: %s, end position: %s, promotion piece type: %s)", this.getStartPosition(),
+        return String.format("start: %s, end: %s, promotion piece: %s", this.getStartPosition(),
     this.getEndPosition(), this.getPromotionPiece());
     }
 

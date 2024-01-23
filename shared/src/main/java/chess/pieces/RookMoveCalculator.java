@@ -1,9 +1,6 @@
 package chess.pieces;
 
-import chess.ChessBoard;
-import chess.ChessMove;
-import chess.ChessPiece;
-import chess.ChessPosition;
+import chess.*;
 
 import java.util.ArrayList;
 
@@ -20,17 +17,27 @@ public class RookMoveCalculator {
 
     public ArrayList<ChessMove> getMoves(){
         ArrayList<ChessMove> possible = new ArrayList<>();
-        int[][] it = {{1,0},{-1,0},{0,1},{0,-1}};
-        for (int[] mul : it){
+        int[][] it = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+        for (int[] iter : it){
             for (int i=1; i < 8; i++){
-                ChessPosition pos = new ChessPosition(this.position.getRow() + i * mul[0],
-                        this.position.getColumn() + i * mul[1]);
-                if (pos.isValid()){
-                    ChessMove move = new ChessMove(position, pos);
-                    possible.add(move);
-//                    if (board.getPiece(pos)!=null){
-//                        break;
-//                    }
+                int rowChange = iter[0] * i;
+                int colChange = iter[1] * i;
+                ChessPosition newPos = position.changePosition(rowChange, colChange);
+                if (newPos.isValid()){
+                    if (board.getPiece(newPos) != null){
+                        if (board.getPiece(newPos).getTeamColor().equals(piece.getTeamColor())){
+                            System.out.println(newPos);
+                            System.out.println(board.getPiece(newPos));
+                            break;
+                        } else {
+                            ChessMove move = new ChessMove(position, newPos);
+                            possible.add(move);
+                            break;
+                        }
+                    } else {
+                        ChessMove move = new ChessMove(position, newPos);
+                        possible.add(move);
+                    }
                 }
             }
         }

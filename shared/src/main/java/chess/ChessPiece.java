@@ -70,7 +70,7 @@ public class ChessPiece {
                 return moveCalculator.getMoves();
             }
         if (this.type.equals(PieceType.BISHOP)) {
-                bishopMoveCalculator = new BishopMoveCalculator(board, myPosition);
+                bishopMoveCalculator = new BishopMoveCalculator(board, myPosition, this);
                 return bishopMoveCalculator.getMoves();
             }
         if (this.type.equals(PieceType.PAWN)) {
@@ -82,10 +82,10 @@ public class ChessPiece {
                 return rookMoveCalculator.getMoves();
             }
         if (this.type.equals(PieceType.QUEEN)){
-                queenMoveCalculator = new QueenMoveCalculator(board, myPosition);
+                queenMoveCalculator = new QueenMoveCalculator(board, myPosition, this);
                 return queenMoveCalculator.getMoves();
             } else {
-            knightMoveCalculator = new KnightMoveCalculator(board, myPosition);
+            knightMoveCalculator = new KnightMoveCalculator(board, myPosition, this);
             return knightMoveCalculator.getMoves();
         }
     }

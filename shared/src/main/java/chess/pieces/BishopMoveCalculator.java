@@ -2,6 +2,7 @@ package chess.pieces;
 
 import chess.ChessBoard;
 import chess.ChessMove;
+import chess.ChessPiece;
 import chess.ChessPosition;
 
 import java.util.ArrayList;
@@ -9,26 +10,47 @@ import java.util.ArrayList;
 public class BishopMoveCalculator {
     private final ChessBoard board;
     private final ChessPosition position;
+    private final ChessPiece piece;
 
-    public BishopMoveCalculator(ChessBoard board, ChessPosition position){
+    public BishopMoveCalculator(ChessBoard board, ChessPosition position, ChessPiece piece){
         this.board = board;
         this.position = position;
+        this.piece = piece;
     }
 
     public ArrayList<ChessMove> getMoves(){
-        //bottom left direction
         ArrayList<ChessMove> possible = new ArrayList<>();
         int[][] it = {{1,1},{-1,-1},{-1,1},{1,-1}};
         for (int[] mul : it){
             for (int i=1; i < 8; i++){
-                ChessPosition pos = new ChessPosition(this.position.getRow() + i * mul[0],
-                        this.position.getColumn() + i * mul[1]);
+                int rowChange = mul[0] * i;
+                int colChange = mul[1] * i;
+//                System.out.println(i * mul[0] + ", " + i * mul[1]);
+                ChessPosition pos = new ChessPosition(position.getRow() + rowChange,
+                        position.getColumn() + colChange);
+                // (7,2) (6,5) (8,7)
+
+//                System.out.println("("+ (position.getRow() + i * mul[0]) + ", " + (position.getColumn() + mul[1]*i) + ")" );
                 if (pos.isValid()){
-                    ChessMove move = new ChessMove(position, pos);
-                    possible.add(move);
-//                    if (board.getPiece(pos)!=null){
-//                        break;
-//                    }
+//                    System.out.println("("+ (position.getRow() + i * mul[0]) + ", " + (position.getColumn() + mul[1]*i) + ")" );
+                    if (board.getPiece(pos) != null) {
+                        System.out.println(pos);
+                        System.out.println(board.getPiece(pos));
+                        if (board.getPiece(pos).getTeamColor().equals(piece.getTeamColor())) {
+//                            System.out.println(pos.getRow() + " " + pos.getColumn());
+                            break;
+                        } else {
+                            ChessMove move = new ChessMove(position, pos);
+                            possible.add(move);
+                            break;
+                        }
+                    }
+                    else if (board.getPiece(pos) == null) {
+                        ChessMove move = new ChessMove(position, pos);
+                        possible.add(move);
+//                        System.out.println(move.getEndPosition().getRow() +", " + move.getEndPosition().getColumn());
+                    }
+//                        System.out.println(move.getEndPosition().getRow() +", " + move.getEndPosition().getColumn());
                 }
             }
         }

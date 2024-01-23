@@ -2,6 +2,7 @@ package chess.pieces;
 
 import chess.ChessBoard;
 import chess.ChessMove;
+import chess.ChessPiece;
 import chess.ChessPosition;
 
 import java.util.ArrayList;
@@ -9,15 +10,40 @@ import java.util.ArrayList;
 public class QueenMoveCalculator {
     private final ChessBoard board;
     private final ChessPosition position;
+    private final ChessPiece piece;
 
-    public QueenMoveCalculator(ChessBoard board, ChessPosition position){
+    public QueenMoveCalculator(ChessBoard board, ChessPosition position, ChessPiece piece){
         this.board = board;
         this.position = position;
+        this.piece = piece;
     }
 
     public ArrayList<ChessMove> getMoves(){
         ArrayList<ChessMove> possible = new ArrayList<>();
-
+        int[][] it = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}, {1,1}, {1,-1}, {-1, 1}, {-1, -1}};
+        for (int[] iter : it){
+            for (int i=1; i < 8; i++){
+                int rowChange = iter[0] * i;
+                int colChange = iter[1] * i;
+                ChessPosition newPos = position.changePosition(rowChange, colChange);
+                if (newPos.isValid()){
+                    if (board.getPiece(newPos) != null){
+                        if (board.getPiece(newPos).getTeamColor().equals(piece.getTeamColor())){
+//                            System.out.println(newPos);
+//                            System.out.println(board.getPiece(newPos));
+                            break;
+                        } else {
+                            ChessMove move = new ChessMove(position, newPos);
+                            possible.add(move);
+                            break;
+                        }
+                    } else {
+                        ChessMove move = new ChessMove(position, newPos);
+                        possible.add(move);
+                    }
+                }
+            }
+        }
         return possible;
     }
 

@@ -60,8 +60,8 @@ public class ChessBoard {
     //MEMBER VARIABLE
     public ChessPiece[][] board;
     public ChessBoard() {
-       this.board = setNormalBoard();
-        //throw new RuntimeException("Not implemented");
+       this.board = new ChessPiece[8][8];
+
     }
 
     /**
@@ -95,6 +95,19 @@ public class ChessBoard {
         return board[position.getRow() - 1][position.getColumn() - 1] != null;
     }
 
+    public boolean hasWhitePiece(ChessPosition position){
+        if (board[position.getRow() - 1][position.getColumn() - 1]==null){
+            return false;
+        }
+        return board[position.getRow() - 1][position.getColumn() - 1].getTeamColor()== ChessGame.TeamColor.WHITE;
+    }
+
+    public boolean hasBlackPiece(ChessPosition position){
+        if (board[position.getRow() - 1][position.getColumn() - 1]==null){
+            return false;
+        }
+        return board[position.getRow() - 1][position.getColumn() - 1].getTeamColor()== ChessGame.TeamColor.BLACK;
+    }
     /**
      * Sets the board to the default starting board
      * (How the game of chess normally starts)
