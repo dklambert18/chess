@@ -19,7 +19,6 @@ public class ChessPiece {
         this.type = type;
         this.color = pieceColor;
         this.hasMoved = false;
-        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -38,9 +37,7 @@ public class ChessPiece {
      * @return Which team this chess piece belongs to
      */
     public ChessGame.TeamColor getTeamColor() {
-
         return this.color;
-        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -48,7 +45,6 @@ public class ChessPiece {
      */
     public PieceType getPieceType() {
         return this.type;
-        //throw new RuntimeException("Not implemented");
         }
 
     /**

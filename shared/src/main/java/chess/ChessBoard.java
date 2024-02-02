@@ -61,7 +61,6 @@ public class ChessBoard {
     public ChessPiece[][] board;
     public ChessBoard() {
        this.board = new ChessPiece[8][8];
-
     }
 
     /**
@@ -74,9 +73,6 @@ public class ChessBoard {
         if (position.getColumn()>8 || position.getRow()>8 || position.getColumn() < 1 || position.getRow() < 1){
             throw new RuntimeException("Out of bounds");
         }
-//        if (board.get(position.getRow() - 1).get(position.getColumn() - 1) != null) {
-//            board.get(position.getRow() - 1).remove(position.getColumn() - 1);
-//        }
         board[position.getRow() - 1][position.getColumn() - 1] = piece;
     }
 
@@ -95,26 +91,12 @@ public class ChessBoard {
         return board[position.getRow() - 1][position.getColumn() - 1] != null;
     }
 
-    public boolean hasWhitePiece(ChessPosition position){
-        if (board[position.getRow() - 1][position.getColumn() - 1]==null){
-            return false;
-        }
-        return board[position.getRow() - 1][position.getColumn() - 1].getTeamColor()== ChessGame.TeamColor.WHITE;
-    }
-
-    public boolean hasBlackPiece(ChessPosition position){
-        if (board[position.getRow() - 1][position.getColumn() - 1]==null){
-            return false;
-        }
-        return board[position.getRow() - 1][position.getColumn() - 1].getTeamColor()== ChessGame.TeamColor.BLACK;
-    }
     /**
      * Sets the board to the default starting board
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
         board = setNormalBoard();
-        //throw new RuntimeException("Not implemented");
     }
 
     @Override
@@ -133,5 +115,10 @@ public class ChessBoard {
 
         ChessBoard test = (ChessBoard) obj;
         return (Arrays.deepEquals(test.board, this.board));
+    }
+
+    @Override
+    public int hashCode(){
+        return Arrays.deepHashCode(board);
     }
 }

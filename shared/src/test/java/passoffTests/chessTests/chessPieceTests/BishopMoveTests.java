@@ -28,6 +28,7 @@ public class BishopMoveTests {
         );
     }
 
+
     @Test
     public void bishopCaptureEnemy() {
         validateMoves("""

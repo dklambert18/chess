@@ -25,19 +25,11 @@ public class BishopMoveCalculator {
             for (int i=1; i < 8; i++){
                 int rowChange = mul[0] * i;
                 int colChange = mul[1] * i;
-//                System.out.println(i * mul[0] + ", " + i * mul[1]);
                 ChessPosition pos = new ChessPosition(position.getRow() + rowChange,
                         position.getColumn() + colChange);
-                // (7,2) (6,5) (8,7)
-
-//                System.out.println("("+ (position.getRow() + i * mul[0]) + ", " + (position.getColumn() + mul[1]*i) + ")" );
                 if (pos.isValid()){
-//                    System.out.println("("+ (position.getRow() + i * mul[0]) + ", " + (position.getColumn() + mul[1]*i) + ")" );
                     if (board.getPiece(pos) != null) {
-                        System.out.println(pos);
-                        System.out.println(board.getPiece(pos));
                         if (board.getPiece(pos).getTeamColor().equals(piece.getTeamColor())) {
-//                            System.out.println(pos.getRow() + " " + pos.getColumn());
                             break;
                         } else {
                             ChessMove move = new ChessMove(position, pos);
@@ -48,9 +40,7 @@ public class BishopMoveCalculator {
                     else if (board.getPiece(pos) == null) {
                         ChessMove move = new ChessMove(position, pos);
                         possible.add(move);
-//                        System.out.println(move.getEndPosition().getRow() +", " + move.getEndPosition().getColumn());
                     }
-//                        System.out.println(move.getEndPosition().getRow() +", " + move.getEndPosition().getColumn());
                 }
             }
         }

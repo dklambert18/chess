@@ -31,22 +31,15 @@ public class ChessPosition {
      * @return which column this position is in
      * 1 codes for the left row
      */
-    public int getColumn() {
-        return this.col;
-        //throw new RuntimeException("Not implemented");
-    }
+    public int getColumn() { return this.col; }
 
-    public boolean isValid(){
-        return row <= 8 && col <= 8 && row > 0 && col > 0;
-    }
+    public boolean isValid(){ return row <= 8 && col <= 8 && row > 0 && col > 0; }
 
-    public ChessPosition changePosition(int r, int c){
-        return new ChessPosition(row + r, col + c);
-    }
+    public ChessPosition changePosition(int r, int c){ return new ChessPosition(row + r, col + c); }
 
-    public boolean endPositionValid(int r, int c){
-        return r + row <= 8 && r + row > 0 && col + c > 0 && col + c <= 8;
-    }
+//    public boolean endPositionValid(int r, int c){
+//        return r + row <= 8 && r + row > 0 && col + c > 0 && col + c <= 8;
+//    }
 
     @Override
     public boolean equals(Object obj){

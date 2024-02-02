@@ -38,8 +38,6 @@ public class PawnMoveCalculator {
                             possible.add(move);
                         }
                     } else {
-//                        System.out.println(board.getPiece(position.changePosition(factor, 1)).getTeamColor() + " " +
-//                                board.getPiece(position.changePosition(factor, 1)));
                         ChessMove move = new ChessMove(position, position.changePosition(factor, 1));
                         possible.add(move);
                     }

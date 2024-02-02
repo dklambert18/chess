@@ -26,8 +26,6 @@ public class RookMoveCalculator {
                 if (newPos.isValid()){
                     if (board.getPiece(newPos) != null){
                         if (board.getPiece(newPos).getTeamColor().equals(piece.getTeamColor())){
-                            System.out.println(newPos);
-                            System.out.println(board.getPiece(newPos));
                             break;
                         } else {
                             ChessMove move = new ChessMove(position, newPos);

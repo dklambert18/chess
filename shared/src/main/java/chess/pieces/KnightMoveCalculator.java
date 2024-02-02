@@ -22,17 +22,12 @@ public class KnightMoveCalculator {
 
             ChessMove move = new ChessMove(position, position.changePosition(c[0], c[1]));
             if (move.getEndPosition().isValid()) {
-                System.out.println("" + c[0] + " " + c[1]);
-
                 if (board.getPiece(move.getEndPosition()) == null){
-//                    System.out.println(c);
                     possible.add(move);
                 }
                 else if (board.hasPiece(move.getEndPosition())){
-
                     if (!board.getPiece(move.getEndPosition()).getTeamColor().equals(piece.getTeamColor())){
                         possible.add(move);
-//                        System.out.println("" + c[0] + " " + c[1]);
                     }
                 }
             }
