@@ -335,18 +335,12 @@ public class ChessGame {
             return false;
         }
         else {
-            Collection<ChessPosition> positions = getTeamPositions(teamColor);
-            Collection<Collection<ChessMove>> moves = getTeamMoves(positions);
+            Collection<Collection<ChessMove>> moves = getTeamMoves(getTeamPositions(teamColor));
             for (Collection<ChessMove> moveSet : moves){
                 checkLegalMoves(moveSet, finalMoves);
             }
         }
-        if (finalMoves.isEmpty()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return finalMoves.isEmpty();
     }
 
     /**
@@ -357,19 +351,23 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
-        if (teamToMove.equals(teamColor)){
+        Collection<ChessMove> finalMoves = new HashSet<>();
+        if (!teamToMove.equals(teamColor)){
+            return false;
+        }
             /*
             if valid moves is empty then return true.
              */
-            if (isInCheck(teamColor)){
-                return false;
-            }
-            else {
-                Collection<Collection<ChessMove>> moves = getTeamMoves(getTeamPositions(teamColor));
-
+        if (isInCheck(teamColor)){
+            return false;
+        }
+        else {
+            Collection<Collection<ChessMove>> moves = getTeamMoves(getTeamPositions(teamColor));
+            for (Collection<ChessMove> moveSet : moves){
+                checkLegalMoves(moveSet, finalMoves);
             }
         }
-        throw new RuntimeException("Not implemented");
+        return finalMoves.isEmpty();
     }
 
     /**
