@@ -109,7 +109,7 @@ public class ChessPiece {
 
     @Override
     public String toString(){
-        return String.format("ChessPiece(piece type: %s, piece color: %s", getPieceType(), getTeamColor());
+        return String.format("ChessPiece(piece type: %s, piece color: %s)", getPieceType(), getTeamColor());
     }
 
 
