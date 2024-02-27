@@ -1,5 +1,6 @@
 package service;
 
+import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
 import dataAccess.MemoryGameDAO;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
@@ -12,7 +13,7 @@ public class CreateGameService {
     MemoryGameDAO gameDAO = new MemoryGameDAO();
 
 
-    public CreateGameResponse createGame(CreateGameRequest req) throws ServiceErrorBadRequest, ServiceErrorUnauthorized {
+    public CreateGameResponse createGame(CreateGameRequest req) throws ServiceErrorBadRequest, ServiceErrorUnauthorized, DataAccessException {
         //check for a bad request
         if (req.getGameName() == null){
             throw new ServiceErrorBadRequest();
@@ -30,7 +31,7 @@ public class CreateGameService {
         //create game
         var gameID = gameDAO.createGame(req.getGameName());
 
-        //check to see if the
+        var useless = gameDAO.getGame(0);
         return new CreateGameResponse(gameID);
     }
 }
