@@ -22,15 +22,15 @@ public class MemoryGameDAO implements GameDAO {
         return gameID;
     }
 
-//    @Override
-//    public GameData getGame(int gameID) throws DataAccessException {
-//        if (data.containsKey(gameID)){
-//            return data.get(gameID);
-//        }
-//        else {
-//            throw new DataAccessException("Game Not Found");
-//        }
-//    }
+    @Override
+    public GameData getGame(int gameID) throws DataAccessException {
+        if (data.containsKey(gameID)){
+            return data.get(gameID);
+        }
+        else {
+            throw new DataAccessException("Game Not Found");
+        }
+    }
 
     @Override
     public void updateWhiteUser(int gameID, String whiteUsername) throws DataAccessException {

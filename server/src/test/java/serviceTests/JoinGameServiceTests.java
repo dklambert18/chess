@@ -34,7 +34,7 @@ public class JoinGameServiceTests {
     }
 
     @Test
-    @DisplayName("bitch")
+    @DisplayName("success")
     void successWhiteAndBlack() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("username", "password",
                 "email");
