@@ -15,7 +15,6 @@ public class ChessPosition {
         this.row = row;
         this.col = col;
 
-        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -24,7 +23,6 @@ public class ChessPosition {
      */
     public int getRow() {
         return this.row;
-        //throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -36,10 +34,6 @@ public class ChessPosition {
     public boolean isValid(){ return row <= 8 && col <= 8 && row > 0 && col > 0; }
 
     public ChessPosition changePosition(int r, int c){ return new ChessPosition(row + r, col + c); }
-
-//    public boolean endPositionValid(int r, int c){
-//        return r + row <= 8 && r + row > 0 && col + c > 0 && col + c <= 8;
-//    }
 
     @Override
     public boolean equals(Object obj){

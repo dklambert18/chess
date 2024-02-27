@@ -96,12 +96,7 @@ public class ChessGame {
         else if (!move.getEndPosition().isValid()){
             throw new InvalidMoveException("That move was invalid");
         }
-//        else if (isInCheck(teamToMove)) {
-//            /*
-//            Check if the move will take the team out of check. If it doesn't, throw an invalid move exception.
-//             */
-//            throw new InvalidMoveException("helllo bruther");
-//        }
+
         else {
             //putting the new piece into the new position (to test the position and see if the move is actually valid)
             ChessPosition startPosition = move.getStartPosition();
@@ -246,6 +241,13 @@ public class ChessGame {
                 }
             }
         }
+
+        return isInKingCheck(teamColor);
+    }
+
+    public boolean isInKingCheck(TeamColor teamColor){
+        ChessPosition startPos = findKing(teamColor);
+        int moveDir = (teamColor.equals(TeamColor.WHITE)) ? 1 : -1;
 
         for (int i=-1; i<2; i++){
             for (int j=-1; j<2; j++){

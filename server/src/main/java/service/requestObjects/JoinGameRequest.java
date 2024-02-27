@@ -14,14 +14,6 @@ public class JoinGameRequest {
         authToken = auth;
     }
 
-    public void setGameID(int id){
-        gameID = id;
-    }
-
-    public void setPlayerColor(String color){
-        playerColor = color;
-    }
-
     public String getAuthToken(){
         return authToken;
     }

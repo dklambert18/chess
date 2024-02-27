@@ -20,10 +20,6 @@ public class CreateGameRequest {
         this.authToken = authToken;
     }
 
-    public void setGameName(String gameName){
-        this.gameName = gameName;
-    }
-
     public String getGameName(){
         return gameName;
     }

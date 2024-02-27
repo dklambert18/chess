@@ -22,48 +22,15 @@ public class MemoryGameDAO implements GameDAO {
         return gameID;
     }
 
-    @Override
-    public void deleteGame(int gameID) throws DataAccessException {
-        if (data.isEmpty()){
-            throw new DataAccessException("Game Not Found");
-        }
-        else if (data.containsKey(gameID)){
-            data.remove(gameID);
-        }
-        else {
-            throw new DataAccessException("Game Not Found");
-        }
-    }
-
-    @Override
-    public GameData getGame(int gameID) throws DataAccessException {
-        if (data.containsKey(gameID)){
-            return data.get(gameID);
-        }
-        else {
-            throw new DataAccessException("Game Not Found");
-        }
-    }
-
-    @Override
-    public String getWhiteUser(int gameID) throws DataAccessException {
-        if (data != null && data.containsKey(gameID)){
-            return data.get(gameID).whiteUsername();
-        }
-        else {
-            return null;
-        }
-    }
-
-    @Override
-    public String getBlackUser(int gameID) {
-        if (data != null && data.containsKey(gameID)){
-            return data.get(gameID).blackUsername();
-        }
-        else {
-            return null;
-        }
-    }
+//    @Override
+//    public GameData getGame(int gameID) throws DataAccessException {
+//        if (data.containsKey(gameID)){
+//            return data.get(gameID);
+//        }
+//        else {
+//            throw new DataAccessException("Game Not Found");
+//        }
+//    }
 
     @Override
     public void updateWhiteUser(int gameID, String whiteUsername) throws DataAccessException {
@@ -101,15 +68,6 @@ public class MemoryGameDAO implements GameDAO {
             games.add(newGame);
         }
         return games;
-    }
-
-    public Boolean findGameName(String gameName){
-        for (Map.Entry<Integer, GameData> game : data.entrySet()){
-            if (game.getValue().gameName().equals(gameName)){
-                return true;
-            }
-        }
-        return false;
     }
 
     public Boolean isColorTaken(String color,  int gameID){

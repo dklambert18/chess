@@ -12,38 +12,38 @@ import java.util.Arrays;
 public class ChessBoard {
     private static ChessPiece[][] setNormalBoard(){
         //Create the whole board
-        ChessPiece[][] starting_board = new ChessPiece[8][8];
+        ChessPiece[][] startingBoard = new ChessPiece[8][8];
 
-        ChessPiece[] white_pieces = new ChessPiece[8];
-        white_pieces[0] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
-        white_pieces[1] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
-        white_pieces[2] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
-        white_pieces[3] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN));
-        white_pieces[4] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING));
-        white_pieces[5] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
-        white_pieces[6] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
-        white_pieces[7] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
-        starting_board[0] = (white_pieces);
+        ChessPiece[] whitePieces = new ChessPiece[8];
+        whitePieces[0] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
+        whitePieces[1] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+        whitePieces[2] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+        whitePieces[3] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN));
+        whitePieces[4] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING));
+        whitePieces[5] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+        whitePieces[6] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+        whitePieces[7] = (new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+        startingBoard[0] = (whitePieces);
 
 
-        starting_board[1] = new ChessPiece[8];
+        startingBoard[1] = new ChessPiece[8];
         for (int i=0; i<8; i++){
-            starting_board[1][i] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
+            startingBoard[1][i] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
         }
 
         for (int i=2; i<6; i++){
-            starting_board[i] = new ChessPiece[8];
+            startingBoard[i] = new ChessPiece[8];
             for (int j=0; j<8; j++){
-                starting_board[i][j] = null;
+                startingBoard[i][j] = null;
             }
         }
 
-        starting_board[6] = new ChessPiece[8];
+        startingBoard[6] = new ChessPiece[8];
         for (int i=0; i<8; i++){
-            starting_board[6][i] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
+            startingBoard[6][i] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
         }
 
-        starting_board[7] = new ChessPiece[]{
+        startingBoard[7] = new ChessPiece[]{
                 new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK),
         (new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT))
         ,(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP))
@@ -54,7 +54,7 @@ public class ChessBoard {
         ,(new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK))
         };
 
-        return starting_board;
+        return startingBoard;
     }
 
     //MEMBER VARIABLE
