@@ -20,7 +20,6 @@ public class ClearServiceTest {
     void clear(){
         //Inserts a user into the userDAO.
         userDAO.createUser("username", "password", "email");
-        userDAO.createUser("username", "password", "email");
 
         //inserts a game into the gameDAO.
         ChessGame game = new ChessGame();
@@ -34,7 +33,7 @@ public class ClearServiceTest {
         //check that each item was inserted
         assertEquals(1, userDAO.size());
         assertEquals(1, gameDAO.size());
-        assertEquals(1, authDAO.size());
+        assertEquals(2, authDAO.size());
 
         //clear the app
         ClearService clearService = new ClearService();
