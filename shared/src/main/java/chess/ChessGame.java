@@ -328,13 +328,8 @@ public class ChessGame {
         if (!isInCheck(teamColor)){
             return false;
         }
-        else {
-            Collection<Collection<ChessMove>> moves = getTeamMoves(getTeamPositions(teamColor));
-            for (Collection<ChessMove> moveSet : moves){
-                checkLegalMoves(moveSet, finalMoves);
-            }
-        }
-        return finalMoves.isEmpty();
+
+        return hasNoMoves(teamColor);
     }
 
     /**
@@ -355,12 +350,17 @@ public class ChessGame {
         if (isInCheck(teamColor)){
             return false;
         }
-        else {
-            Collection<Collection<ChessMove>> moves = getTeamMoves(getTeamPositions(teamColor));
-            for (Collection<ChessMove> moveSet : moves){
-                checkLegalMoves(moveSet, finalMoves);
-            }
+        return hasNoMoves(teamColor);
+    }
+
+    public boolean hasNoMoves(TeamColor color){
+        Collection<ChessMove> finalMoves = new HashSet<>();
+
+        Collection<Collection<ChessMove>> moves = getTeamMoves(getTeamPositions(color));
+        for (Collection<ChessMove> moveSet : moves){
+            checkLegalMoves(moveSet, finalMoves);
         }
+
         return finalMoves.isEmpty();
     }
 
