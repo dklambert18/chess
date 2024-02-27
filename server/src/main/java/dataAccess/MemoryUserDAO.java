@@ -27,19 +27,6 @@ public class MemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public void deleteUser(String username) throws DataAccessException {
-        if (data.isEmpty()){
-            throw new DataAccessException("message: Error: user not found");
-        }
-        else if (data.containsKey(username)){
-            data.remove(username);
-        }
-        else {
-            throw new DataAccessException("message: Error: user not found");
-        }
-    }
-
-    @Override
     public void clear() {
         data.clear();
     }

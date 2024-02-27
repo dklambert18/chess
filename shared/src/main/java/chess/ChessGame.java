@@ -174,7 +174,6 @@ public class ChessGame {
                 }
             }
         }
-
         /*
         Checking the straight directions for rooks that have the king in check
          */
@@ -184,7 +183,6 @@ public class ChessGame {
                 int rowChange = rDir[0] * i + startPos.getRow();
                 int colChange = rDir[1] * i + startPos.getColumn();
                 ChessPosition pos = new ChessPosition(rowChange, colChange);
-
                 if (pos.isValid()){
                     if (board.getPiece(pos) != null){
                         ChessPiece currPiece = board.getPiece(pos);
@@ -203,7 +201,6 @@ public class ChessGame {
                 }
             }
         }
-
         /*
         Checking the knight opp positions.
          */
@@ -212,7 +209,6 @@ public class ChessGame {
             int rowChange = kDir[0] + startPos.getRow();
             int colChange = kDir[1] + startPos.getColumn();
             ChessPosition pos = new ChessPosition(rowChange, colChange);
-
             if (pos.isValid()){
                 if (board.getPiece(pos) != null){
                     if (board.getPiece(pos).getPieceType().equals(ChessPiece.PieceType.KNIGHT)
@@ -222,7 +218,6 @@ public class ChessGame {
                 }
             }
         }
-
         /*
         Check for pawns that have checked the King
          */
@@ -231,7 +226,6 @@ public class ChessGame {
             int rowChange = pDir[0] * moveDir + startPos.getRow();
             int colChange = pDir[1] + startPos.getColumn();
             ChessPosition pos = new ChessPosition(rowChange, colChange);
-
             if (pos.isValid()){
                 if (board.getPiece(pos) != null){
                     if (board.getPiece(pos).getPieceType().equals(ChessPiece.PieceType.PAWN)
@@ -241,7 +235,6 @@ public class ChessGame {
                 }
             }
         }
-
         return isInKingCheck(teamColor);
     }
 

@@ -4,9 +4,9 @@ public class JoinGameRequest {
     String authToken;
     String playerColor;
     int gameID;
-    public JoinGameRequest(String auth, String color, int ID){
+    public JoinGameRequest(String auth, String color, int id){
         playerColor = color;
-        gameID = ID;
+        gameID = id;
         authToken = auth;
     }
 
