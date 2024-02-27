@@ -1,2 +1,4 @@
-package service.responseObjects;public class JoinGameResponse {
+package service.responseObjects;
+
+public record JoinGameResponse() {
 }

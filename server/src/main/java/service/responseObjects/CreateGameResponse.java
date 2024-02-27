@@ -1,2 +1,3 @@
-package service.responseObjects;public class CreateGameResponse {
-}
+package service.responseObjects;
+
+public record CreateGameResponse(Integer gameID) {}

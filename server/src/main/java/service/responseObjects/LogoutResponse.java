@@ -1,2 +1,4 @@
-package service.responseObjects;public class LogoutResponse {
+package service.responseObjects;
+
+public record LogoutResponse(String response) {
 }

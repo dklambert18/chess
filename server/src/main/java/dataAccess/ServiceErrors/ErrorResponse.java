@@ -1,2 +1,4 @@
-package dataAccess.ServiceErrors;public class ErrorResponse {
+package dataAccess.ServiceErrors;
+
+public record ErrorResponse(String message) {
 }

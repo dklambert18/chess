@@ -10,7 +10,7 @@ import service.ClearService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class clearTests {
+public class ClearServiceTest {
 
     MemoryUserDAO userDAO = new MemoryUserDAO();
     MemoryGameDAO gameDAO = new MemoryGameDAO();
@@ -19,6 +19,7 @@ public class clearTests {
     @Test
     void clear(){
         //Inserts a user into the userDAO.
+        userDAO.createUser("username", "password", "email");
         userDAO.createUser("username", "password", "email");
 
         //inserts a game into the gameDAO.
@@ -43,7 +44,5 @@ public class clearTests {
         assertEquals(0, userDAO.size());
         assertEquals(0, gameDAO.size());
         assertEquals(0, authDAO.size());
-
-
     }
 }

@@ -1,17 +1,16 @@
 package service;
 
-import model.AuthData;
-import model.UserData;
+import dataAccess.MemoryAuthDAO;
+import dataAccess.MemoryGameDAO;
+import dataAccess.MemoryUserDAO;
 
-public class UserService {
-    public AuthData register(UserData user){
-        return null;
-    }
-    public AuthData login(UserData user){
-        return null;
-    }
-    public void logout(UserData user){}
-    public boolean clearApp(){
-        return false;
+public class ClearService {
+    MemoryUserDAO user = new MemoryUserDAO();
+    MemoryGameDAO game = new MemoryGameDAO();
+    MemoryAuthDAO auth = new MemoryAuthDAO();
+    public void clearApp() {
+        user.clear();
+        game.clear();
+        auth.clear();
     }
 }

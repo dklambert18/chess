@@ -1,2 +1,6 @@
-package service.responseObjects;public class RegisterResponse {
+package service.responseObjects;
+
+import java.util.UUID;
+
+public record RegisterResponse(String username, String authToken) {
 }

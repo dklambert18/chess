@@ -1,4 +1,4 @@
-package dataAccess.requestObjects;
+package service.requestObjects;
 
-public class LoginRequest {
+public record LoginRequest(String username, String password) {
 }

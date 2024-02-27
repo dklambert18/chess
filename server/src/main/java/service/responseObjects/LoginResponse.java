@@ -1,2 +1,4 @@
-package service.responseObjects;public class LoginResponse {
+package service.responseObjects;
+
+public record LoginResponse(String username, String authToken) {
 }
