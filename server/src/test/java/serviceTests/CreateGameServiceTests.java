@@ -1,9 +1,8 @@
 package serviceTests;
 
-import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryGameDAO;
+import dataAccess.MemoryAccess.MemoryUserDAO;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import org.junit.jupiter.api.BeforeEach;

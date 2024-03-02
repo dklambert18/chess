@@ -1,10 +1,6 @@
-package dataAccess.DAOs;
+package dataAccess.DAOInterfaces;
 
 import dataAccess.DataAccessException;
-import model.AuthData;
-
-import javax.xml.crypto.Data;
-import java.util.UUID;
 
 public interface AuthDAO {
     String createAuth(String username);

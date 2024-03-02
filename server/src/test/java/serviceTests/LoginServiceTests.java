@@ -1,10 +1,7 @@
 package serviceTests;
 
-import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
-import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
-import dataAccess.ServiceErrors.ServiceErrorBadRequest;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryUserDAO;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +10,6 @@ import service.RegisterService;
 import service.requestObjects.LoginRequest;
 import service.requestObjects.RegisterRequest;
 import service.responseObjects.LoginResponse;
-import service.responseObjects.RegisterResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 

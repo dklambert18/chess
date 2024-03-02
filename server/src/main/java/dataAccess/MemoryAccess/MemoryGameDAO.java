@@ -1,11 +1,10 @@
-package dataAccess;
+package dataAccess.MemoryAccess;
 
 import chess.ChessGame;
-import dataAccess.DAOs.GameDAO;
-import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
+import dataAccess.DAOInterfaces.GameDAO;
+import dataAccess.DataAccessException;
 import model.GameData;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MemoryGameDAO implements GameDAO {

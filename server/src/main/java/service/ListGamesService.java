@@ -1,17 +1,14 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryGameDAO;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import model.GameData;
 import service.requestObjects.ListGamesRequest;
 import service.responseObjects.ListGamesResponse;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class ListGamesService {
     MemoryAuthDAO authDAO = new MemoryAuthDAO();

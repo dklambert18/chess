@@ -1,21 +1,11 @@
 package service;
 
-import dataAccess.DAOs.UserDAO;
-import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryUserDAO;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
-import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
-import model.UserData;
 import service.requestObjects.RegisterRequest;
 import service.responseObjects.RegisterResponse;
-import spark.Request;
-import spark.Response;
-import spark.Spark;
-
-import javax.xml.crypto.Data;
-import java.util.UUID;
 
 public class RegisterService {
     MemoryUserDAO userDAO = new MemoryUserDAO();

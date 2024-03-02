@@ -1,15 +1,12 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryUserDAO;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import model.UserData;
 import service.requestObjects.LoginRequest;
 import service.responseObjects.LoginResponse;
-
-import java.util.Objects;
-import java.util.UUID;
 
 public class LoginService {
     MemoryUserDAO userDAO = new MemoryUserDAO();

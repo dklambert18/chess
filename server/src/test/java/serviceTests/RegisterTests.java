@@ -1,18 +1,14 @@
 package serviceTests;
 
-import com.google.gson.stream.JsonReader;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryUserDAO;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
-import model.AuthData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.RegisterService;
 import service.requestObjects.RegisterRequest;
 import service.responseObjects.RegisterResponse;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 

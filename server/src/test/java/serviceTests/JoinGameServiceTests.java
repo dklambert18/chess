@@ -1,8 +1,8 @@
 package serviceTests;
 
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryGameDAO;
+import dataAccess.MemoryAccess.MemoryUserDAO;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
@@ -15,7 +15,6 @@ import service.RegisterService;
 import service.requestObjects.CreateGameRequest;
 import service.requestObjects.JoinGameRequest;
 import service.requestObjects.RegisterRequest;
-import service.responseObjects.JoinGameResponse;
 import service.responseObjects.RegisterResponse;
 
 import static org.junit.jupiter.api.Assertions.*;

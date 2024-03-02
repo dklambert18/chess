@@ -1,8 +1,8 @@
 package service;
 
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAccess.MemoryGameDAO;
+import dataAccess.MemoryAccess.MemoryUserDAO;
 
 public class ClearService {
     MemoryUserDAO user = new MemoryUserDAO();

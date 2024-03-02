@@ -1,10 +1,8 @@
-package dataAccess;
+package dataAccess.MemoryAccess;
 
-import dataAccess.DAOs.UserDAO;
+import dataAccess.DAOInterfaces.UserDAO;
 import model.UserData;
-import org.eclipse.jetty.server.Authentication;
 
-import javax.xml.crypto.Data;
 import java.util.HashMap;
 import java.util.Map;
 
