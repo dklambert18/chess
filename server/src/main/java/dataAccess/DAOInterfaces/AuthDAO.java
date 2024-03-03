@@ -3,7 +3,7 @@ package dataAccess.DAOInterfaces;
 import dataAccess.DataAccessException;
 
 public interface AuthDAO {
-    String createAuth(String username);
+    String createAuth(String username) throws DataAccessException;
     void deleteAuth(String auth);
 
 //    AuthData getAuth(String authToken) throws DataAccessException;

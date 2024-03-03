@@ -1,9 +1,9 @@
 package serviceTests;
 
 import chess.ChessGame;
-import dataAccess.MemoryAccess.MemoryAuthDAO;
-import dataAccess.MemoryAccess.MemoryGameDAO;
-import dataAccess.MemoryAccess.MemoryUserDAO;
+import dataAccess.MemoryAuthDAO;
+import dataAccess.MemoryGameDAO;
+import dataAccess.MemoryUserDAO;
 import model.GameData;
 import org.junit.jupiter.api.Test;
 import service.ClearService;

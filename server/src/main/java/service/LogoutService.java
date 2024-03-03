@@ -1,7 +1,7 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.MemoryAccess.MemoryAuthDAO;
+import dataAccess.MemoryAuthDAO;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import service.requestObjects.LogoutRequest;
 import service.responseObjects.LogoutResponse;

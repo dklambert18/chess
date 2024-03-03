@@ -1,8 +1,8 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.MemoryAccess.MemoryAuthDAO;
-import dataAccess.MemoryAccess.MemoryGameDAO;
+import dataAccess.MemoryAuthDAO;
+import dataAccess.MemoryGameDAO;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import service.requestObjects.CreateGameRequest;
