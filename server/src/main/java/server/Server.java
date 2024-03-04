@@ -39,7 +39,7 @@ public class Server {
         Spark.awaitStop();
     }
 
-    private Object clearData(Request req, Response res) {
+    private Object clearData(Request req, Response res) throws DataAccessException {
         ClearService service = new ClearService();
         service.clearApp();
         res.status(200);
@@ -64,9 +64,9 @@ public class Server {
         }
 
         //checking for any other error.
-        else if (response.getClass().equals(DataAccessException.class)){
+        else if (response.getClass().equals(Exception.class)){
             res.status(500);
-            response = new ErrorResponse(((DataAccessException) response).getMessage());
+            response = new ErrorResponse(((Exception) response).getMessage());
         }
 
         //everything worked and we return the RegisterResponse object

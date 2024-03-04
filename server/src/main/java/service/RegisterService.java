@@ -1,16 +1,15 @@
 package service;
 
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import service.requestObjects.RegisterRequest;
 import service.responseObjects.RegisterResponse;
 
 public class RegisterService {
-    MemoryUserDAO userDAO = new MemoryUserDAO();
+    MySQLUserDAO userDAO = new MySQLUserDAO();
 
-    public RegisterService(){
+    public RegisterService() throws DataAccessException {
     }
 
     public Object register(RegisterRequest req) throws ServiceErrorAlreadyTaken, ServiceErrorBadRequest, Exception{

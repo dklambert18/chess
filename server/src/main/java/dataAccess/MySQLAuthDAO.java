@@ -1,20 +1,14 @@
 package dataAccess;
 
-import chess.ChessGame;
 import dataAccess.DAOInterfaces.AuthDAO;
-import dataAccess.DataAccessException;
-import dataAccess.DatabaseManager;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.UUID;
 
-import static java.sql.Statement.RETURN_GENERATED_KEYS;
-import static java.sql.Types.NULL;
-
 public class MySQLAuthDAO implements AuthDAO {
 
-    MySQLAuthDAO() throws DataAccessException {
+    public MySQLAuthDAO() throws DataAccessException {
         configureDatabase();
     }
 
@@ -73,18 +67,19 @@ public class MySQLAuthDAO implements AuthDAO {
             throw new RuntimeException(e);
         }
     }
-        String[] statements = {"""
+        String[] sqlString = {"""
             CREATE TABLE IF NOT EXISTS  auth (
-              'auth_token' varchar(256) PRIMARY KEY,
-              `username` varchar(256) NOT NULL,
-              INDEX(username)
+              auth_token varchar(256) NOT NULL,
+              username varchar(256) NOT NULL,
+              INDEX(username),
+              PRIMARY KEY (auth_token)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """};
 
     private void configureDatabase() throws DataAccessException {
         DatabaseManager.createDatabase();
         try (var conn = DatabaseManager.getConnection()) {
-            for (var statement : statements) {
+            for (var statement : sqlString) {
                 try (var preparedStatement = conn.prepareStatement(statement)) {
                     preparedStatement.executeUpdate();
                 }

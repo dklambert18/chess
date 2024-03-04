@@ -1,5 +1,6 @@
 package serviceTests;
 
+import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
 import dataAccess.MemoryUserDAO;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
@@ -52,7 +53,7 @@ public class RegisterTests {
         assertThrows(ServiceErrorAlreadyTaken.class, () -> { service.register(request);});    }
 
     @Test
-    void RegisterBadRequest() throws ServiceErrorBadRequest, ServiceErrorAlreadyTaken {
+    void RegisterBadRequest() throws ServiceErrorBadRequest, ServiceErrorAlreadyTaken, DataAccessException {
         RegisterRequest request1 = new RegisterRequest(null, "password", "email");
         RegisterService service1 = new RegisterService();
 

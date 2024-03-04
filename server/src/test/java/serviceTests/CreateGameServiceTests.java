@@ -1,5 +1,6 @@
 package serviceTests;
 
+import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
 import dataAccess.MemoryGameDAO;
 import dataAccess.MemoryUserDAO;
@@ -25,7 +26,7 @@ public class CreateGameServiceTests {
     public CreateGameService service = new CreateGameService();
 
     @BeforeEach
-    void clear(){
+    void clear() throws DataAccessException {
         new ClearService().clearApp();
     }
 

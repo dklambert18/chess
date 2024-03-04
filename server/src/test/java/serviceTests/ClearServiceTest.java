@@ -1,6 +1,7 @@
 package serviceTests;
 
 import chess.ChessGame;
+import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
 import dataAccess.MemoryGameDAO;
 import dataAccess.MemoryUserDAO;
@@ -17,7 +18,7 @@ public class ClearServiceTest {
     MemoryAuthDAO authDAO = new MemoryAuthDAO();
 
     @Test
-    void clear(){
+    void clear() throws DataAccessException {
         //Inserts a user into the userDAO.
         userDAO.createUser("username", "password", "email");
 
