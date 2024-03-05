@@ -8,6 +8,7 @@ public interface AuthDAO {
 
 //    AuthData getAuth(String authToken) throws DataAccessException;
     String getUser(String authToken) throws DataAccessException;
+    int size() throws DataAccessException;
     void clear();
 
 }

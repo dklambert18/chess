@@ -57,6 +57,21 @@ public class MySQLAuthDAO implements AuthDAO {
         }
     }
 
+    public int size() throws DataAccessException {
+        String statement = "Select * from auth";
+        int count = 0;
+        try (var conn = DatabaseManager.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(statement);
+            var list = preparedStatement.executeQuery();
+            while (list.next()){
+                count += 1;
+            }
+            return count;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void clear() {
         String statement = "TRUNCATE TABLE auth";

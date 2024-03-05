@@ -16,9 +16,20 @@ public class SQLClearMethodTests {
 
     public SQLClearMethodTests() throws DataAccessException {
     }
-
-    public void clearGames() throws DataAccessException {
+    @Test
+    void clearGames() throws DataAccessException {
         gameDAO.clear();
-        assertEquals()
+        assertEquals(0, gameDAO.size());
+    }
+    @Test
+    void clearUsers() throws DataAccessException {
+        userDAO.clear();
+        assertEquals(0, userDAO.size());
+    }
+
+    @Test
+    void clearAuth() throws DataAccessException {
+        authDAO.clear();
+        assertEquals(0, authDAO.size());
     }
 }

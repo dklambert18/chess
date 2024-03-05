@@ -30,8 +30,8 @@ public class MySQLUserDAO implements UserDAO {
     @Override
     public UserData getUser(String username) throws DataAccessException {
         String statement = "SELECT password, email FROM users where username = ?";
-        String userPassword = null;
-        String email = null;
+        String userPassword;
+        String email;
         try (var conn = DatabaseManager.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
             preparedStatement.setString(1, username);
@@ -49,8 +49,19 @@ public class MySQLUserDAO implements UserDAO {
         }
     }
 
-    public int size(){
-        return 0;
+    public int size() throws DataAccessException {
+        String statement = "Select * from users";
+        int count = 0;
+        try (var conn = DatabaseManager.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(statement);
+            var list = preparedStatement.executeQuery();
+            while (list.next()){
+                count += 1;
+            }
+            return count;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
