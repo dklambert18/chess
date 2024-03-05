@@ -76,7 +76,7 @@ public class Server {
         return new Gson().toJson(response);
     }
 
-    private Object login(Request req, Response res) {
+    private Object login(Request req, Response res) throws DataAccessException {
         LoginHandler loginHandler = new LoginHandler();
         Object response = loginHandler.login(req);
 
@@ -94,7 +94,7 @@ public class Server {
         return new Gson().toJson(response);
     }
 
-    private Object logout(Request req, Response res) {
+    private Object logout(Request req, Response res) throws DataAccessException {
         LogoutHandler logoutHandler = new LogoutHandler();
         Object response = logoutHandler.logout(req);
 
@@ -102,9 +102,9 @@ public class Server {
             res.status(401);
             response = new ErrorResponse("Error: unauthorized");
         }
-        else if (response.getClass().equals(DataAccessException.class)){
+        else if (response.getClass().equals(Exception.class)){
             res.status(500);
-            response = new ErrorResponse(((DataAccessException) response).getMessage());
+            response = new ErrorResponse(((Exception) response).getMessage());
         }
         else {
             res.status(200);

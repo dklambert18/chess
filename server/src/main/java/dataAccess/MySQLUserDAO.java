@@ -16,17 +16,14 @@ public class MySQLUserDAO implements UserDAO {
     }
     @Override
     public void createUser(String username, String password, String email) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String newPassword = encoder.encode(password);
         String statement = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
         try (var conn = DatabaseManager.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, newPassword);
+            preparedStatement.setString(2, password);
             preparedStatement.setString(3, email);
             preparedStatement.executeUpdate();
-        } catch (SQLException | DataAccessException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | DataAccessException ignored) {
         }
     }
 
@@ -42,6 +39,7 @@ public class MySQLUserDAO implements UserDAO {
             if (info.next()){
                 userPassword = info.getString("password");
                 email = info.getString("email");
+                return new UserData(username, userPassword, email);
             }
             else {
                 return null;
@@ -49,7 +47,6 @@ public class MySQLUserDAO implements UserDAO {
         } catch (SQLException | DataAccessException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
     @Override

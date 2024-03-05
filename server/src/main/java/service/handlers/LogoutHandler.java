@@ -1,6 +1,7 @@
 package service.handlers;
 
 import com.google.gson.Gson;
+import dataAccess.DataAccessException;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import service.LogoutService;
 import service.requestObjects.LogoutRequest;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 public class LogoutHandler {
 
-    public Object logout(Request req){
+    public Object logout(Request req) throws DataAccessException {
 
         //convert the http request into the LoginRequest object.
         LogoutRequest logoutRequest = new LogoutRequest(req.headers("Authorization"));

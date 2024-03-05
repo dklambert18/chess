@@ -1,16 +1,18 @@
 package service;
 
-import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import model.UserData;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import service.requestObjects.LoginRequest;
 import service.responseObjects.LoginResponse;
 
 public class LoginService {
-    MemoryUserDAO userDAO = new MemoryUserDAO();
-    MemoryAuthDAO authDAO = new MemoryAuthDAO();
+    MySQLUserDAO userDAO = new MySQLUserDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
+
+    public LoginService() throws DataAccessException {
+    }
 
 
     public Object login(LoginRequest req) throws ServiceErrorUnauthorized, DataAccessException {
@@ -26,9 +28,12 @@ public class LoginService {
             throw new ServiceErrorUnauthorized();
         }
 
+        //check encryption.
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         //check if the user's password is correct.
         String password = userData.password();
-        if (!password.equals(req.password())){
+        if (!encoder.matches(req.password(), password)){
             throw new ServiceErrorUnauthorized();
         }
 

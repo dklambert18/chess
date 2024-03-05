@@ -3,11 +3,14 @@ package service;
 import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import service.requestObjects.RegisterRequest;
 import service.responseObjects.RegisterResponse;
 
 public class RegisterService {
     MySQLUserDAO userDAO = new MySQLUserDAO();
+    MySQLAuthDAO auth = new MySQLAuthDAO();
+
 
     public RegisterService() throws DataAccessException {
     }
@@ -23,12 +26,12 @@ public class RegisterService {
         if (userData != null){
             throw new ServiceErrorAlreadyTaken();
         }
-
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String newPassword = encoder.encode(req.password());
         //if the user didn't exist, then we create the successful response object.
-        userDAO.createUser(req.username(), req.password(), req.email());
+        userDAO.createUser(req.username(), newPassword, req.email());
 
         //Then we give the user a new authToken.
-        MemoryAuthDAO auth = new MemoryAuthDAO();
         String authToken = auth.createAuth(req.username());
 
         //return the successful response object.

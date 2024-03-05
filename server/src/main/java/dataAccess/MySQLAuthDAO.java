@@ -14,22 +14,22 @@ public class MySQLAuthDAO implements AuthDAO {
 
     @Override
     public String createAuth(String username) throws DataAccessException {
-        String auth = UUID.randomUUID().toString();
+        String newAuth = UUID.randomUUID().toString();
         String statement = "INSERT INTO auth (auth_token, username) VALUES (?, ?)";
         try (var conn = DatabaseManager.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
-            preparedStatement.setString(1, auth);
+            preparedStatement.setString(1, newAuth);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return auth;
+        return newAuth;
     }
 
     @Override
     public void deleteAuth(String auth) {
-        String statement = "DELETE * FROM auth where auth_token = ?";
+        String statement = "DELETE FROM auth where auth_token = ?";
         try (var conn = DatabaseManager.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
             preparedStatement.setString(1, auth);
@@ -47,7 +47,7 @@ public class MySQLAuthDAO implements AuthDAO {
             preparedStatement.setString(1, authToken);
             var info = preparedStatement.executeQuery();
             if (info.next()){
-                return info.getString(1);
+                return info.getString("username");
             }
             else {
                 return null;
@@ -73,7 +73,7 @@ public class MySQLAuthDAO implements AuthDAO {
               username varchar(256) NOT NULL,
               INDEX(username),
               PRIMARY KEY (auth_token)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+            );
             """};
 
     private void configureDatabase() throws DataAccessException {

@@ -2,12 +2,16 @@ package service;
 
 import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
+import dataAccess.MySQLAuthDAO;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import service.requestObjects.LogoutRequest;
 import service.responseObjects.LogoutResponse;
 
 public class LogoutService {
-    MemoryAuthDAO authDAO = new MemoryAuthDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
+
+    public LogoutService() throws DataAccessException {
+    }
 
     public LogoutResponse logout(LogoutRequest r) throws ServiceErrorUnauthorized, DataAccessException {
         if (r.authToken() == null){
