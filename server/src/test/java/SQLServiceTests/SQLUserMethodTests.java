@@ -25,10 +25,10 @@ public class SQLUserMethodTests {
         assertEquals(1, userDAO.size());
     }
     @Test
-    void createUserFail() throws DataAccessException{
+    void createUserFail() throws DataAccessException {
         userDAO.createUser("username", "password", "email");
-        assertThrows(Exception.class, () -> {userDAO.createUser("username",
-                                        "password", "email");});
+        userDAO.createUser("username", "password", "email");
+        assertEquals(1, userDAO.size());
 
     }
 

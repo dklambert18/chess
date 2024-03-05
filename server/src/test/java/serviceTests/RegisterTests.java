@@ -1,8 +1,6 @@
 package serviceTests;
 
-import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,10 +12,10 @@ import service.responseObjects.RegisterResponse;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RegisterTests {
-    MemoryUserDAO userDAO = new MemoryUserDAO();
-    MemoryAuthDAO authDAO = new MemoryAuthDAO();
+    MySQLUserDAO userDAO = new MySQLUserDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
 
-    public RegisterTests() throws ServiceErrorBadRequest, ServiceErrorAlreadyTaken {
+    public RegisterTests() throws ServiceErrorBadRequest, ServiceErrorAlreadyTaken, DataAccessException {
     }
 
     @BeforeEach
@@ -34,7 +32,7 @@ public class RegisterTests {
         RegisterResponse res = (RegisterResponse) response;
 
 
-        var newUser = new MemoryUserDAO();
+        var newUser = new MySQLUserDAO();
 
         assertEquals("username", res.username());
         assertEquals(authDAO.getUser(res.authToken()), res.username());

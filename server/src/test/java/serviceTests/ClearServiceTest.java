@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ClearServiceTest {
 
     MySQLUserDAO userDAO = new MySQLUserDAO();
-    MemoryGameDAO gameDAO = new MemoryGameDAO();
-    MemoryAuthDAO authDAO = new MemoryAuthDAO();
+    MySQLGameDAO gameDAO = new MySQLGameDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
 
     public ClearServiceTest() throws DataAccessException {
     }
@@ -35,9 +35,9 @@ public class ClearServiceTest {
         ClearService clearService = new ClearService();
         clearService.clearApp();
 
-        //do the final checks to see if it cleared
-//        assertEquals(0, userDAO.size());
-//        assertEquals(0, gameDAO.size());
-//        assertEquals(0, authDAO.size());
+//        do the final checks to see if it cleared
+        assertEquals(0, userDAO.size());
+        assertEquals(0, gameDAO.size());
+        assertEquals(0, authDAO.size());
     }
 }

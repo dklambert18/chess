@@ -1,8 +1,6 @@
 package serviceTests;
 
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
@@ -21,12 +19,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JoinGameServiceTests {
 
-    public MemoryGameDAO gameDAO = new MemoryGameDAO();
-    public MemoryAuthDAO authDAO = new MemoryAuthDAO();
-    public MemoryUserDAO userDAO = new MemoryUserDAO();
+    MySQLUserDAO userDAO = new MySQLUserDAO();
+    MySQLGameDAO gameDAO = new MySQLGameDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
+
+    public JoinGameServiceTests() throws DataAccessException {
+    }
 
     @BeforeEach
-    void clear(){
+    void clear() throws DataAccessException {
         gameDAO.clear();
         authDAO.clear();
         userDAO.clear();

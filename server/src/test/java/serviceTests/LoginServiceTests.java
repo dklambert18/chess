@@ -1,7 +1,6 @@
 package serviceTests;
 
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryUserDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +13,11 @@ import service.responseObjects.LoginResponse;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginServiceTests {
-    MemoryUserDAO userDAO = new MemoryUserDAO();
-    MemoryAuthDAO authDAO = new MemoryAuthDAO();
+    MySQLUserDAO userDAO = new MySQLUserDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
+
+    public LoginServiceTests() throws DataAccessException {
+    }
 
     @BeforeEach
     void clear(){

@@ -160,7 +160,7 @@ public class MySQLGameDAO implements GameDAO {
             white_username varchar(256),
             black_username varchar(256),
             game_name varchar(256) NOT NULL,
-            board varchar(512) NOT NULL
+            board varchar(1000) NOT NULL
             );
             """};
 
