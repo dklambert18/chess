@@ -49,6 +49,10 @@ public class MySQLUserDAO implements UserDAO {
         }
     }
 
+    public int size(){
+        return 0;
+    }
+
     @Override
     public void clear() {
         String statement = "TRUNCATE TABLE users";

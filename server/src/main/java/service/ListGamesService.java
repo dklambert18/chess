@@ -1,8 +1,6 @@
 package service;
 
-import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import model.GameData;
 import service.requestObjects.ListGamesRequest;
@@ -11,11 +9,14 @@ import service.responseObjects.ListGamesResponse;
 import java.util.ArrayList;
 
 public class ListGamesService {
-    MemoryAuthDAO authDAO = new MemoryAuthDAO();
-    MemoryGameDAO gameDAO = new MemoryGameDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
+    MySQLGameDAO gameDAO = new MySQLGameDAO();
+
+    public ListGamesService() throws DataAccessException {
+    }
 
     public ListGamesResponse listGames(ListGamesRequest req) throws ServiceErrorUnauthorized, DataAccessException {
-        ArrayList<GameData> gameList = new ArrayList<>();
+        ArrayList<GameData> gameList;
         var user = authDAO.getUser(req.authToken());
 
         if (user == null){

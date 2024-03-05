@@ -2,12 +2,16 @@ package dataAccess;
 
 import chess.ChessGame;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dataAccess.DAOInterfaces.GameDAO;
 import model.GameData;
 
+import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class MySQLGameDAO implements GameDAO {
 
@@ -18,13 +22,13 @@ public class MySQLGameDAO implements GameDAO {
     @Override
     public int createGame(String gameName) {
         String statement = "INSERT INTO games (game_name, board) VALUES (?, ?)";
-        String query = "SELECT gameID FROM games where game_name = ?";
-        String board = new ChessGame().toString();
+        ChessGame thing = new ChessGame();
+        String game = serializeGame(thing);
         var gameID = 0;
         try (var conn = DatabaseManager.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, gameName);
-            preparedStatement.setString(2, board);
+            preparedStatement.setString(2, game);
             preparedStatement.executeUpdate() ;
 
             var info = preparedStatement.getGeneratedKeys();
@@ -39,7 +43,7 @@ public class MySQLGameDAO implements GameDAO {
 
     @Override
     public GameData getGame(int gameID) {
-        String statement = "SELECT white_username, black_username, game_name, board FROM games where gameID = ?";
+        String statement = "SELECT white_username, black_username, game_name, board FROM games where game_id = ?";
         String whiteUsername;
         String blackUsername;
         String gameName;
@@ -68,7 +72,7 @@ public class MySQLGameDAO implements GameDAO {
 
     @Override
     public void updateWhiteUser(int gameID, String whiteUsername) throws DataAccessException {
-        String statement = "UPDATE games SET black_username = ? WHERE gameID = ?";
+        String statement = "UPDATE games SET white_username = ? WHERE game_id = ?";
         try (var conn = DatabaseManager.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
             preparedStatement.setString(1, whiteUsername);
@@ -80,7 +84,7 @@ public class MySQLGameDAO implements GameDAO {
 
     @Override
     public void updateBlackUser(int gameID, String blackUsername) throws DataAccessException {
-        String statement = "UPDATE games SET black_username = ? WHERE gameID = ?";
+        String statement = "UPDATE games SET black_username = ? WHERE game_id = ?";
         try (var conn = DatabaseManager.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(statement);
             preparedStatement.setString(1, blackUsername);
@@ -90,26 +94,80 @@ public class MySQLGameDAO implements GameDAO {
         }
     }
 
+    public boolean isColorTaken(String playerColor, int gameID){
+        String statement = "SELECT white_username, black_username FROM games where game_id = ?";
+        String whiteUsername;
+        String blackUsername;
+
+        try (var conn = DatabaseManager.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(statement);
+            preparedStatement.setInt(1, gameID);
+            var info = preparedStatement.executeQuery();
+            if (info.next()){
+                whiteUsername = info.getString(1);
+                blackUsername = info.getString(2);
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException | DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+    if ((Objects.equals(playerColor, "WHITE") && whiteUsername != null)) return true;
+
+    else return Objects.equals(playerColor, "BLACK") && blackUsername != null;
+    }
+
+    public ArrayList<GameData> listGames() {
+        String statement = "SELECT game_id, white_username, black_username, game_name FROM games";
+        int gameID;
+        String whiteUsername;
+        String blackUsername;
+        String gameName;
+        ArrayList<GameData> finalList = new ArrayList<>();
+
+        try (var conn = DatabaseManager.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(statement);
+            var info = preparedStatement.executeQuery();
+            while (info.next()){
+                gameID = info.getInt("game_id");
+                whiteUsername = info.getString("white_username");
+                blackUsername = info.getString("black_username");
+                gameName = info.getString("game_name");
+                GameData game = new GameData(gameID, whiteUsername, blackUsername, gameName, null);
+                finalList.add(game);
+            }
+            return finalList;
+        } catch (SQLException | DataAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     private ChessGame deserializeGame(String game){
         Gson gson = new Gson();
         return gson.fromJson(game, ChessGame.class);
     }
 
     private String serializeGame(ChessGame game){
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(game, ChessGame.class);
     }
 
     String[] sqlString = {"""
             CREATE TABLE IF NOT EXISTS games (
-              gameID int AUTO_INCREMENT NOT NULL,
-              white_username varchar(256),
-              black_username varchar(256),
-              game_name varchar(256) NOT NULL,
-              board varchar(512) NOT NULL,
-              PRIMARY KEY (gameID)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+            game_id int AUTO_INCREMENT PRIMARY KEY,
+            white_username varchar(256),
+            black_username varchar(256),
+            game_name varchar(256) NOT NULL,
+            board varchar(512) NOT NULL
+            );
             """};
+
+    public int size(){
+        var list = listGames();
+        return list.size();
+    }
 
     @Override
     public void clear() throws DataAccessException {
@@ -134,4 +192,6 @@ public class MySQLGameDAO implements GameDAO {
             throw new RuntimeException(e);
         }
     }
+
+
 }

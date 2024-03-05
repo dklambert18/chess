@@ -1,7 +1,6 @@
 package service;
 
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
@@ -9,8 +8,11 @@ import service.requestObjects.JoinGameRequest;
 import service.responseObjects.JoinGameResponse;
 
 public class JoinGameService {
-    public MemoryAuthDAO authDAO = new MemoryAuthDAO();
-    public MemoryGameDAO gameDAO = new MemoryGameDAO();
+    public MySQLAuthDAO authDAO = new MySQLAuthDAO();
+    public MySQLGameDAO gameDAO = new MySQLGameDAO();
+
+    public JoinGameService() throws DataAccessException {
+    }
 
     public Object joinGame(JoinGameRequest req) throws Exception {
         if (req.getGameID() == 0){
@@ -23,6 +25,11 @@ public class JoinGameService {
         }
 
         var username = authDAO.getUser(auth);
+
+        //check to see that the game exists
+        if (gameDAO.getGame(req.getGameID()).gameName() == null){
+            throw new ServiceErrorBadRequest();
+        }
 
         //check to see if the game name is taken in the gameDAO.
         if (gameDAO.isColorTaken(req.getPlayerColor(), req.getGameID())){

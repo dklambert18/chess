@@ -112,7 +112,7 @@ public class Server {
         return new Gson().toJson(response);
     }
 
-    private Object listGames(Request req, Response res) {
+    private Object listGames(Request req, Response res) throws DataAccessException {
         ListGamesHandler handler = new ListGamesHandler();
         var response = handler.listGames(req);
 
@@ -140,14 +140,14 @@ public class Server {
             res.status(401);
             response = new ErrorResponse("Error: unauthorized");
         }
-        if (response.getClass().equals(DataAccessException.class)) {
+        if (response.getClass().equals(Exception.class)) {
             res.status(500);
-            response = new ErrorResponse(((DataAccessException) response).getMessage());
+            response = new ErrorResponse(((Exception) response).getMessage());
         }
         return new Gson().toJson(response);
     }
 
-    private Object joinGame(Request req, Response res) {
+    private Object joinGame(Request req, Response res) throws DataAccessException {
         var joinGameHandler = new JoinGameHandler();
         Object response = joinGameHandler.joinGame(req);
 
