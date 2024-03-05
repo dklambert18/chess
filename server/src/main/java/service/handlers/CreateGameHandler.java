@@ -1,6 +1,7 @@
 package service.handlers;
 
 import com.google.gson.Gson;
+import dataAccess.DataAccessException;
 import service.CreateGameService;
 import service.requestObjects.CreateGameRequest;
 import service.requestObjects.LogoutRequest;
@@ -9,7 +10,7 @@ import spark.Request;
 
 public class CreateGameHandler {
 
-    public Object createGame(Request req){
+    public Object createGame(Request req) throws DataAccessException {
         //parse the json body with gameName into a separate request object.
         CreateGameRequest request = new Gson().fromJson(req.body(), CreateGameRequest.class);
 

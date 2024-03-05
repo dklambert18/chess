@@ -25,6 +25,9 @@ public class CreateGameServiceTests {
     public MemoryGameDAO gameDAO = new MemoryGameDAO();
     public CreateGameService service = new CreateGameService();
 
+    public CreateGameServiceTests() throws DataAccessException {
+    }
+
     @BeforeEach
     void clear() throws DataAccessException {
         new ClearService().clearApp();

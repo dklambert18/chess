@@ -1,16 +1,17 @@
 package service;
 
-import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
+import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import service.requestObjects.CreateGameRequest;
 import service.responseObjects.CreateGameResponse;
 
 public class CreateGameService {
-    MemoryAuthDAO authDAO = new MemoryAuthDAO();
-    MemoryGameDAO gameDAO = new MemoryGameDAO();
+    MySQLAuthDAO authDAO = new MySQLAuthDAO();
+    MySQLGameDAO gameDAO = new MySQLGameDAO();
+
+    public CreateGameService() throws DataAccessException {
+    }
 
 
     public CreateGameResponse createGame(CreateGameRequest req) throws ServiceErrorBadRequest, ServiceErrorUnauthorized, DataAccessException {

@@ -128,7 +128,7 @@ public class Server {
         return new Gson().toJson(response);
     }
 
-    private Object createGame(Request req, Response res) {
+    private Object createGame(Request req, Response res) throws DataAccessException {
         CreateGameHandler handler = new CreateGameHandler();
         Object response = handler.createGame(req);
 
