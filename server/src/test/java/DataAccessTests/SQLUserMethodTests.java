@@ -1,4 +1,4 @@
-package SQLServiceTests;
+package DataAccessTests;
 
 import dataAccess.DataAccessException;
 import dataAccess.MySQLUserDAO;

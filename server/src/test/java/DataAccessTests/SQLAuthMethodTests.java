@@ -1,14 +1,10 @@
-package SQLServiceTests;
+package DataAccessTests;
 
 import dataAccess.DataAccessException;
-import dataAccess.DatabaseManager;
 import dataAccess.MySQLAuthDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.PreparedStatement;
-
-import static dataAccess.DatabaseManager.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SQLAuthMethodTests {
