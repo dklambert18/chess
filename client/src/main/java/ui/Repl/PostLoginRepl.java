@@ -19,6 +19,7 @@ public class PostLoginRepl {
     }
 
     public String run() {
+
         Scanner scanner = new Scanner(System.in);
 
         String result = "";
@@ -43,7 +44,15 @@ public class PostLoginRepl {
         return "quit";
     }
     public String help() {
-        return "help";
+        return """
+                create <name> - create a game
+                list - games
+                join <ID> [WHITE|BLACK|<empty>] - join a game
+                observe <ID> - observe a game
+                logout - stop playing chess
+                quit - quit playing chess
+                help - get help with the possible commands you dummy
+                """;
     }
 
     public void printPrompt() {
@@ -54,7 +63,7 @@ public class PostLoginRepl {
         try {
             return switch (params[0].toLowerCase()) {
                 case "logout" -> client.logout(params);
-                case "join" -> client.login(params);
+                case "join" -> client.joinGame(params);
                 case "observe" -> client.joinGame(params);
                 case "list" -> client.listGames(params);
                 case "create" -> client.createGame(params);

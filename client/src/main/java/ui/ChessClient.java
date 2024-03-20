@@ -9,7 +9,7 @@ import static ui.ClientState.State.LOGGED_OUT;
 
 public class ChessClient {
 
-    private ServerFacade facade;
+    private final ServerFacade facade;
     public ClientState.State state = LOGGED_OUT;
     private String auth;
 
@@ -18,10 +18,11 @@ public class ChessClient {
     }
 
     public String createGame(String... params) {
-        assert params.length == 2;
-        assert state == LOGGED_IN;
+        if (params.length != 2){
+
+        }
         try {
-            var result = facade.createGame(params[1], params[2]);
+            var result = facade.createGame(params[1], auth);
             return result.gameID().toString();
         } catch (Exception e) {
             return e.getMessage();
@@ -65,11 +66,17 @@ public class ChessClient {
 
     public String joinGame(String... params) {
         if (params.length > 3 || params.length == 1) {
-
+            return "Error: Expected: join <ID> [WHITE|BLACK|<empty>]";
         }
         assert state == LOGGED_IN;
         try {
-            var result = facade.joinGame(params[1], params[2], Integer.parseInt(params[3]));
+            if (params.length == 3) {
+                var result = facade.joinGame(auth, params[1], Integer.parseInt(params[2]));
+            }
+            else if (params.length == 2){
+                var result = facade.joinGame(auth, null, Integer.parseInt(params[2]));
+
+            }
             return null;
         } catch (Exception e) {
             return e.getMessage();
@@ -80,6 +87,7 @@ public class ChessClient {
         try {
             var result = facade.logout(auth);
             state = LOGGED_OUT;
+            auth = null;
             return "logged";
         } catch (Exception e) {
             return e.getMessage();
@@ -91,10 +99,13 @@ public class ChessClient {
             var result = facade.listGames(auth);
             var gameList = result.games();
             StringBuilder finalList = new StringBuilder();
+            int i = 1;
             for (GameData game : gameList) {
-                String oneLine = "\n" + game.gameName() + " " + game.whiteUsername() + " "
-                                    + game.blackUsername() + "\n";
+                String oneLine = "\n" + i + ") " + game.gameName() + ": Game ID - " + game.gameID() +
+                        ": White Player - " + game.whiteUsername() + ": Black" +
+                        "Player - " + game.blackUsername();
                 finalList.append(oneLine);
+                i += 1;
             }
             return finalList.toString();
         } catch (Exception e) {
