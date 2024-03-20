@@ -4,8 +4,8 @@ import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import service.requestObjects.RegisterRequest;
-import service.responseObjects.RegisterResponse;
+import requestObjects.RegisterRequest;
+import responseObjects.RegisterResponse;
 
 public class RegisterService {
     MySQLUserDAO userDAO = new MySQLUserDAO();

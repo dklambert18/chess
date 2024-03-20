@@ -2,9 +2,7 @@ package service.handlers;
 
 import dataAccess.DataAccessException;
 import service.ListGamesService;
-import service.requestObjects.ListGamesRequest;
-import service.requestObjects.LogoutRequest;
-import service.responseObjects.ListGamesResponse;
+import requestObjects.ListGamesRequest;
 import spark.Request;
 
 public class ListGamesHandler {

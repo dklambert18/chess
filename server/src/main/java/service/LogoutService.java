@@ -1,11 +1,10 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
 import dataAccess.MySQLAuthDAO;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
-import service.requestObjects.LogoutRequest;
-import service.responseObjects.LogoutResponse;
+import requestObjects.LogoutRequest;
+import responseObjects.LogoutResponse;
 
 public class LogoutService {
     MySQLAuthDAO authDAO = new MySQLAuthDAO();

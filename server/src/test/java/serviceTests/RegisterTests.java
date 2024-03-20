@@ -6,8 +6,8 @@ import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.RegisterService;
-import service.requestObjects.RegisterRequest;
-import service.responseObjects.RegisterResponse;
+import requestObjects.RegisterRequest;
+import responseObjects.RegisterResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 

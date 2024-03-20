@@ -1,4 +1,4 @@
-package service.requestObjects;
+package requestObjects;
 
 public class CreateGameRequest {
     String gameName;

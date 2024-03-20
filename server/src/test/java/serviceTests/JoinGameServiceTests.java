@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import service.CreateGameService;
 import service.JoinGameService;
 import service.RegisterService;
-import service.requestObjects.CreateGameRequest;
-import service.requestObjects.JoinGameRequest;
-import service.requestObjects.RegisterRequest;
-import service.responseObjects.RegisterResponse;
+import requestObjects.CreateGameRequest;
+import requestObjects.JoinGameRequest;
+import requestObjects.RegisterRequest;
+import responseObjects.RegisterResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 

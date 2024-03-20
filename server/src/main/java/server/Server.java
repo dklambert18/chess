@@ -7,14 +7,12 @@ import dataAccess.ServiceErrors.ErrorResponse;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
+import responseObjects.JoinGameResponse;
 import service.ClearService;
 import service.handlers.*;
-import service.responseObjects.*;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
-
-import javax.xml.crypto.Data;
 
 public class Server {
     public int run(int desiredPort) {
@@ -28,7 +26,6 @@ public class Server {
         Spark.get("/game", this::listGames);
         Spark.post("/game", this::createGame);
         Spark.put("/game", this::joinGame);
-//      Spark.exception(ResponseException.class, this::exceptionHandler);
 
         Spark.awaitInitialization();
         return Spark.port();
@@ -80,7 +77,6 @@ public class Server {
         LoginHandler loginHandler = new LoginHandler();
         Object response = loginHandler.login(req);
 
-        //catching the error cases.
         if (response.getClass().equals(ServiceErrorUnauthorized.class)) {
             res.status(401);
             response = new ErrorResponse("Error: unauthorized");

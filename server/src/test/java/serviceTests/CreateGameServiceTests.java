@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import service.ClearService;
 import service.CreateGameService;
 import service.RegisterService;
-import service.requestObjects.CreateGameRequest;
-import service.requestObjects.RegisterRequest;
-import service.responseObjects.RegisterResponse;
+import requestObjects.CreateGameRequest;
+import requestObjects.RegisterRequest;
+import responseObjects.RegisterResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

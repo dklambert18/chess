@@ -3,8 +3,8 @@ package service;
 import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
-import service.requestObjects.CreateGameRequest;
-import service.responseObjects.CreateGameResponse;
+import requestObjects.CreateGameRequest;
+import responseObjects.CreateGameResponse;
 
 public class CreateGameService {
     MySQLAuthDAO authDAO = new MySQLAuthDAO();

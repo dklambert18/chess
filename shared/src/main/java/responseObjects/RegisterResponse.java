@@ -1,4 +1,4 @@
-package service.responseObjects;
+package responseObjects;
 
 import java.util.UUID;
 

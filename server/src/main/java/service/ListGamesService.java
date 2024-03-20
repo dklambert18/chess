@@ -3,8 +3,8 @@ package service;
 import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import model.GameData;
-import service.requestObjects.ListGamesRequest;
-import service.responseObjects.ListGamesResponse;
+import requestObjects.ListGamesRequest;
+import responseObjects.ListGamesResponse;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package service.responseObjects;
+package responseObjects;
 
 public record LogoutResponse(String response) {
 }

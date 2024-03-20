@@ -3,8 +3,7 @@ package service.handlers;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
 import service.LoginService;
-import service.requestObjects.LoginRequest;
-import service.responseObjects.LoginResponse;
+import requestObjects.LoginRequest;
 import spark.Request;
 
 public class LoginHandler {

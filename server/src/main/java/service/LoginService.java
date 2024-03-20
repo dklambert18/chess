@@ -4,8 +4,8 @@ import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
 import model.UserData;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import service.requestObjects.LoginRequest;
-import service.responseObjects.LoginResponse;
+import requestObjects.LoginRequest;
+import responseObjects.LoginResponse;
 
 public class LoginService {
     MySQLUserDAO userDAO = new MySQLUserDAO();

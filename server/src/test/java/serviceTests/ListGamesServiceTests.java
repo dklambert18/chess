@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import service.CreateGameService;
 import service.ListGamesService;
 import service.RegisterService;
-import service.requestObjects.CreateGameRequest;
-import service.requestObjects.ListGamesRequest;
-import service.requestObjects.RegisterRequest;
-import service.responseObjects.RegisterResponse;
+import requestObjects.CreateGameRequest;
+import requestObjects.ListGamesRequest;
+import requestObjects.RegisterRequest;
+import responseObjects.RegisterResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

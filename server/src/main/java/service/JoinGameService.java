@@ -4,8 +4,8 @@ import dataAccess.*;
 import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
 import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import dataAccess.ServiceErrors.ServiceErrorUnauthorized;
-import service.requestObjects.JoinGameRequest;
-import service.responseObjects.JoinGameResponse;
+import requestObjects.JoinGameRequest;
+import responseObjects.JoinGameResponse;
 
 public class JoinGameService {
     public MySQLAuthDAO authDAO = new MySQLAuthDAO();

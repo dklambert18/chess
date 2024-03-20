@@ -1,11 +1,8 @@
 package service.handlers;
 
 import com.google.gson.Gson;
-import dataAccess.ServiceErrors.ServiceErrorAlreadyTaken;
-import dataAccess.ServiceErrors.ServiceErrorBadRequest;
 import service.RegisterService;
-import service.requestObjects.RegisterRequest;
-import service.responseObjects.RegisterResponse;
+import requestObjects.RegisterRequest;
 import spark.Request;
 
 public class RegisterHandler {
