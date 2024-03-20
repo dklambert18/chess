@@ -111,4 +111,11 @@ public class ServerFacadeTests {
         var finalResult = facade.listGames(response.authToken());
         assertEquals(ListGamesResponse.class, finalResult.getClass());
     }
+
+    @Test
+    public void listGamesFail() throws Exception {
+        RegisterResponse response = facade.register("username", "password", "email");
+        var auth = response.authToken();
+        var firstResult = facade.createGame("game", auth);
+        assertThrows(Exception.class, () -> {facade.listGames("blah");});    }
 }

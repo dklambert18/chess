@@ -1,12 +1,15 @@
-package ui;
+package ui.Repl;
 
+import java.util.Objects;
 import java.util.Scanner;
+
+import ui.ChessClient;
 import ui.EscapeSequences.*;
 
 import static ui.EscapeSequences.*;
 
-public class PreLoginRepl {
-    private ChessClient client;
+public class PreLoginRepl extends Repl {
+    private final ChessClient client;
 
     public PreLoginRepl(String serverUrl){
         client = new ChessClient(serverUrl, this);
@@ -22,7 +25,8 @@ public class PreLoginRepl {
             String line = scanner.nextLine();
 
             try {
-                result = client.eval(line);
+                var request = line.split(" ")[0];
+
                 System.out.println(SET_TEXT_COLOR_GREEN + result + RESET_TEXT_COLOR);
             } catch (Exception e) {
                 var msg = e.getMessage();
@@ -31,7 +35,7 @@ public class PreLoginRepl {
         }
         System.out.println();
     }
-
+    @Override
     public String help() {
         return """
                 register <username> <password> <email> - to create an account
@@ -41,7 +45,24 @@ public class PreLoginRepl {
                 """;
     }
 
+    public void printLine() {
+
+    }
+
     public void printPrompt(){
         System.out.println("\n" + SET_TEXT_COLOR_BLUE + "[logged out]" + ">>>" + RESET_TEXT_COLOR);
+    }
+
+    public String eval(String... params) throws Exception {
+        try {
+            return switch (params[0]) {
+                case "register" -> client.register(params);
+                case "login" -> client.login(params);
+                case "quit" -> null;
+                default -> help();
+            };
+        } catch(Exception e){
+            return e.getMessage();
+        }
     }
 }
