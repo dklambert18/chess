@@ -30,6 +30,17 @@ public class GameRepl {
 
         while (!result.equals("quit")){
             printPrompt();
+            System.out.println();
+            if (client.color == ChessGame.TeamColor.WHITE){
+                client.color = ChessGame.TeamColor.BLACK;
+                printPrompt();
+                client.color = ChessGame.TeamColor.WHITE;
+            }
+            else {
+                client.color = ChessGame.TeamColor.WHITE;
+                printPrompt();
+                client.color = ChessGame.TeamColor.BLACK;
+            }
             System.out.println( SET_TEXT_COLOR_WHITE + "Tell us what you think of our chessboard!!! ");
 
             String line = scanner.nextLine();
@@ -111,6 +122,7 @@ public class GameRepl {
         String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h"};
         String emptySpace = "   ";
         System.out.print(SET_BG_COLOR_BLUE + emptySpace);
+        System.out.print(SET_TEXT_COLOR_BLACK);
         for (int i=0; i<8; i++){
             if ((Objects.equals(client.color, ChessGame.TeamColor.WHITE))) {
                 System.out.print("  " + letters[i] + "  ");

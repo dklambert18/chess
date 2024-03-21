@@ -5,6 +5,8 @@ import model.GameData;
 import serverFacade.ServerFacade;
 
 
+import java.util.ArrayList;
+
 import static ui.ClientState.State.LOGGED_IN;
 import static ui.ClientState.State.LOGGED_OUT;
 
@@ -14,6 +16,7 @@ public class ChessClient {
     public ClientState.State state = LOGGED_OUT;
     private String auth;
     public ChessGame.TeamColor color = ChessGame.TeamColor.WHITE;
+    public ArrayList<GameData> lastGameList = new ArrayList<>();
 
     public ChessClient(String serverUrl) {
         facade = new ServerFacade(serverUrl);
@@ -70,7 +73,6 @@ public class ChessClient {
         if (params.length > 3 || params.length == 1) {
             return "Error: Expected: join <ID> [WHITE|BLACK|<empty>]";
         }
-        assert state == LOGGED_IN;
         try {
             if (params.length == 3) {
                 var result = facade.joinGame(auth,  Integer.parseInt(params[1]), params[2]);
@@ -85,7 +87,7 @@ public class ChessClient {
                 var result = facade.joinGame(auth, Integer.parseInt(params[1]), null);
             }
             return (params.length == 3)? "[joined] You successfully joined as " + params[2]: "You successfully joined as an" +
-                    "observer";
+                    " observer";
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -109,7 +111,8 @@ public class ChessClient {
             StringBuilder finalList = new StringBuilder();
             int i = 1;
             for (GameData game : gameList) {
-                String oneLine = "\n" + i + ") " + game.gameName() + ": Game ID - " + game.gameID() +
+                lastGameList.add(game);
+                String oneLine = "\n" + i + ") " + game.gameName() +
                         ": White Player - " + game.whiteUsername() + ": Black" +
                         "Player - " + game.blackUsername();
                 finalList.append(oneLine);
