@@ -54,7 +54,7 @@ public class ServerFacade {
         return makeRequest("POST", path, auth, request, CreateGameResponse.class);
     }
 
-    public JoinGameResponse joinGame(String auth, String color, int gameID) throws Exception {
+    public JoinGameResponse joinGame(String auth, int gameID, String color) throws Exception {
         var path = "/game";
         var request = new JoinGameRequest(auth, color, gameID);
 

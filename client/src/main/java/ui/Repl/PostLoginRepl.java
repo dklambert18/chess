@@ -12,10 +12,12 @@ public class PostLoginRepl {
     String serverUrl;
     ChessClient client;
     ClientState.State state = ClientState.State.LOGGED_IN;
+    GameRepl gameRepl;
 
     public PostLoginRepl(String url, ChessClient client){
         serverUrl = url;
         this.client = client;
+        gameRepl = new GameRepl(url, client);
     }
 
     public String run() {
@@ -35,6 +37,9 @@ public class PostLoginRepl {
                 System.out.println(SET_TEXT_COLOR_GREEN + result + RESET_TEXT_COLOR);
                 if (Objects.equals(result.split(" ")[0].toLowerCase(), "logged")){
                     return "logout";
+                }
+                if (result.split(" ")[0].equals("[joined]")){
+                    result = gameRepl.run();
                 }
             } catch (Exception e) {
                 var msg = e.getMessage();
@@ -64,7 +69,8 @@ public class PostLoginRepl {
             return switch (params[0].toLowerCase()) {
                 case "logout" -> client.logout(params);
                 case "join" -> client.joinGame(params);
-                case "observe" -> client.joinGame(params);
+                case "observe" -> (params.length <= 2)? client.joinGame(params): "Error: Expected: " +
+                                                                "observe <ID>";
                 case "list" -> client.listGames(params);
                 case "create" -> client.createGame(params);
                 case "quit" -> "quit";

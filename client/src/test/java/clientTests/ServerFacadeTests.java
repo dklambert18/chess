@@ -91,7 +91,7 @@ public class ServerFacadeTests {
         RegisterResponse response = facade.register("username", "password", "email");
         var auth = response.authToken();
         var firstResult = facade.createGame("game", auth);
-        var finalResult = facade.joinGame(response.authToken(), "WHITE", firstResult.gameID());
+        var finalResult = facade.joinGame(response.authToken(), firstResult.gameID(), "WHITE");
         assertEquals(JoinGameResponse.class, finalResult.getClass());
     }
 
@@ -101,7 +101,7 @@ public class ServerFacadeTests {
         var auth = response.authToken();
         var firstResult = facade.createGame("game", auth);
         assertThrows(Exception.class, () -> {facade.joinGame("blah",
-                "WHITE", firstResult.gameID());});
+                 firstResult.gameID(), "WHITE");});
     }
     @Test
     public void listGamesTest() throws Exception {

@@ -10,7 +10,7 @@ import java.util.Arrays;
  * signature of the existing methods.
  */
 public class ChessBoard {
-    private static ChessPiece[][] setNormalBoard(){
+    public static ChessPiece[][] setNormalBoard(){
         //Create the whole board
         ChessPiece[][] startingBoard = new ChessPiece[8][8];
 

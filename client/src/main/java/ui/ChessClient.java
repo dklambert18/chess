@@ -1,5 +1,6 @@
 package ui;
 
+import chess.ChessGame;
 import model.GameData;
 import serverFacade.ServerFacade;
 
@@ -12,6 +13,7 @@ public class ChessClient {
     private final ServerFacade facade;
     public ClientState.State state = LOGGED_OUT;
     private String auth;
+    public ChessGame.TeamColor color = ChessGame.TeamColor.WHITE;
 
     public ChessClient(String serverUrl) {
         facade = new ServerFacade(serverUrl);
@@ -71,13 +73,19 @@ public class ChessClient {
         assert state == LOGGED_IN;
         try {
             if (params.length == 3) {
-                var result = facade.joinGame(auth, params[1], Integer.parseInt(params[2]));
+                var result = facade.joinGame(auth,  Integer.parseInt(params[1]), params[2]);
+                String stringColor = params[2];
+                if (stringColor.equals("WHITE")){
+                    color = ChessGame.TeamColor.WHITE;
+                } else if (stringColor.equals("BLACK")){
+                    color = ChessGame.TeamColor.BLACK;
+                }
             }
             else if (params.length == 2){
-                var result = facade.joinGame(auth, null, Integer.parseInt(params[2]));
-
+                var result = facade.joinGame(auth, Integer.parseInt(params[1]), null);
             }
-            return null;
+            return (params.length == 3)? "[joined] You successfully joined as " + params[2]: "You successfully joined as an" +
+                    "observer";
         } catch (Exception e) {
             return e.getMessage();
         }
