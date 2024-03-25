@@ -105,6 +105,7 @@ public class ChessClient {
     }
 
     public String listGames(String[] params) {
+        lastGameList.clear();
         try {
             var result = facade.listGames(auth);
             var gameList = result.games();
