@@ -86,7 +86,7 @@ public class ChessClient {
             else if (params.length == 2){
                 var result = facade.joinGame(auth, Integer.parseInt(params[1]), null);
             }
-            return (params.length == 3)? "[joined] You successfully joined as " + params[2]: "You successfully joined as an" +
+            return (params.length == 3)? "[joined] You successfully joined as " + params[2]: "[joined] You successfully joined as an" +
                     " observer";
         } catch (Exception e) {
             return e.getMessage();
